@@ -1,0 +1,15 @@
+README.md
+angular.json
+node_modules/
+tsconfig.app.json
+tsconfig.json
+tsconfig.spec.json
+package-lock.jsonpackage.json
+package-lock.json
+package.json
+.angular/
+.editorconfig
+.vscode/
+public/
+
+
