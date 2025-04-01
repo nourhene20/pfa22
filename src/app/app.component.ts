@@ -7,8 +7,6 @@ import { ClientComponent } from './client/client.component';
   selector: 'app-root',
   imports: [
     RouterOutlet,
-AdminComponent,
-ClientComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
