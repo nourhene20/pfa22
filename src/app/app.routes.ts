@@ -1,9 +1,13 @@
 import { Routes } from '@angular/router';
 import path from 'node:path';
-import { AdminComponent } from './admin/admin.component';
-import { ClientComponent } from './client/client.component';
+import { GestionEntretienComponent } from './gestion-entretien/gestion-entretien.component';
+import { AjoutEntretienComponent } from './ajout-entretien/ajout-entretien.component';
+
+
+
 
 export const routes: Routes = [
-    { path: 'admin', component: AdminComponent },
-    {path:'client' ,component:ClientComponent},
-];
+   {path:'gestion_entretien', component:GestionEntretienComponent},
+    {path:'ajout_entretien', component:AjoutEntretienComponent},
+    {path:"edit/:id",component:AjoutEntretienComponent}
+   ];

@@ -1,0 +1,18 @@
+<div class="row">
+    <div class="col">
+        <form (ngSubmit)="onSubmit()" [formGroup]="entretienForm">
+          <div class="form-group">
+            <label for="domaine">Domaine</label>
+            <input type="text" class="form-control" formControlName="domaine">
+            <label for="questions">Questions</label>
+            <textarea
+              class="form-control auto-wrap"
+              formControlName="questions"
+              rows="10"
+              placeholder="Saisissez vos questions..."
+            ></textarea>
+          </div>
+          <button [disabled]="!entretienForm.valid" class="btn btn-success">Ajouter</button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+.auto-wrap {
+    font-size: 1rem; /* Taille normale */
+    white-space: pre-wrap; /* Conserve les sauts de ligne */
+    word-wrap: break-word; /* Casse les mots longs */
+    overflow-wrap: break-word; /* Nouvelle version de word-wrap */
+    line-height: 1.5; /* Espacement entre les lignes */
+  }
+  
+  .auto-wrap:focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  }

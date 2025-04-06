@@ -1,12 +1,18 @@
+import { ReactiveFormsModule } from '@angular/forms';
+
+
+
 import { Component } from '@angular/core';
+
+
 import { RouterOutlet } from '@angular/router';
-import { AdminComponent } from './admin/admin.component';
-import { ClientComponent } from './client/client.component';
+
 
 @Component({
   selector: 'app-root',
   imports: [
     RouterOutlet,
+  ReactiveFormsModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

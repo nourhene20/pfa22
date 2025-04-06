@@ -1,0 +1,21 @@
+<h2>Gestion des entretiens</h2>
+<table class="table table-bordered">
+<thead>
+<tr>
+<th>Domaine</th>
+<th>Questions</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr *ngFor="let entretien of entretiens ; let i=index">
+<td>{{entretien.domaine}}</td>
+<td> {{entretien.questions}}</td>
+<td>
+<button (click)="onEdit(i)" class="btn btn-light">Modifier</button>
+<button (click)="onDelete(i)" class="btn btn-danger">supprimer</button>
+</td>
+</tr>
+
+</tbody>
+</table>
