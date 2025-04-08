@@ -1,34 +1,46 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Entretien } from '../Shared/entretien.entree';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { EntretienService } from '../Shared/entretien.service';
+import { Entretien } from '../Shared/entretien.entree';
+import { Subject, Subscription, takeUntil } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-gestion-entretien',
   standalone: true,
-  imports: [CommonModule ], 
+  imports: [CommonModule],
   templateUrl: './gestion-entretien.component.html',
   styleUrls: ['./gestion-entretien.component.scss']
 })
-export class GestionEntretienComponent  implements OnInit,OnDestroy{
- entretiens: Entretien[] = [];
- entretienSubscription=new Subscription();
- constructor(private entretienService:EntretienService,private router:Router){}
-  ngOnDestroy(): void {
-    this.entretienSubscription.unsubscribe();
-  }
+export class GestionEntretienComponent implements OnInit, OnDestroy {
+  entretiens: Entretien[] = [];
+  private destroy$ = new Subject<void>();
+  private subscription!: Subscription;
+
+  constructor(private entretienService: EntretienService) {}
+
   ngOnInit(): void {
-    this.entretienSubscription=this.entretienService.entretienSubject.subscribe(entretiens=>{
-      this.entretiens=entretiens;
-    });
-    this.entretiens=this.entretienService.entretiens;
+    this.loadData();
+    this.subscription = this.entretienService.entretiens$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(entretiens => this.entretiens = entretiens);
   }
-  onDelete(index:number){
-    this.entretienService.onDelete(index);
+
+  loadData(): void {
+    this.entretienService.loadEntretiens();
   }
-  onEdit(index:number){
-    this.router.navigate(["edit", index]);
+
+  onDelete(id: string): void {
+    this.entretienService.deleteEntretien(id).subscribe();
+  }
+
+  trackById(index: number, entretien: Entretien): string {
+    return entretien.id;
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+    this.subscription?.unsubscribe();
   }
   
-  }
+}

@@ -1,21 +1,40 @@
-<h2>Gestion des entretiens</h2>
-<table class="table table-bordered">
-<thead>
-<tr>
-<th>Domaine</th>
-<th>Questions</th>
-<th>Action</th>
-</tr>
-</thead>
-<tbody>
-<tr *ngFor="let entretien of entretiens ; let i=index">
-<td>{{entretien.domaine}}</td>
-<td> {{entretien.questions}}</td>
-<td>
-<button (click)="onEdit(i)" class="btn btn-light">Modifier</button>
-<button (click)="onDelete(i)" class="btn btn-danger">supprimer</button>
-</td>
-</tr>
-
-</tbody>
-</table>
+<div class="container mt-4">
+    <h2 class="mb-4">Gestion des entretiens</h2>
+  
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover">
+        <thead class="table-light">
+          <tr>
+            <th scope="col">Domaine</th>
+            <th scope="col">Questions</th>
+            <th scope="col" class="text-end">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- État de chargement -->
+          <tr *ngIf="entretiens.length === 0">
+            <td colspan="3" class="text-center text-muted py-4">
+              Chargement des entretiens...
+            </td>
+          </tr>
+  
+          <!-- Liste des entretiens -->
+          <tr *ngFor="let entretien of entretiens; trackBy: trackById">
+            <td class="align-middle">{{ entretien.domaine }}</td>
+            <td class="align-middle pre-wrap-text">{{ entretien.questions }}</td>
+            <td class="text-end">
+              <div class="d-flex gap-2 justify-content-end">
+                <button 
+                  (click)="onDelete(entretien.id)" 
+                  class="btn btn-danger btn-sm"
+                  title="Supprimer cet entretien"
+                >
+                  <i class="bi bi-trash"></i> Supprimer
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

@@ -1,18 +1,69 @@
-<div class="row">
-    <div class="col">
-        <form (ngSubmit)="onSubmit()" [formGroup]="entretienForm">
-          <div class="form-group">
-            <label for="domaine">Domaine</label>
-            <input type="text" class="form-control" formControlName="domaine">
-            <label for="questions">Questions</label>
-            <textarea
-              class="form-control auto-wrap"
-              formControlName="questions"
-              rows="10"
-              placeholder="Saisissez vos questions..."
-            ></textarea>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h2 class="mb-4">{{ editMode ? 'Modifier un entretien' : 'Créer un nouvel entretien' }}</h2>
+      
+      <form (ngSubmit)="onSubmit()" [formGroup]="entretienForm">
+        <!-- Champ Domaine -->
+        <div class="form-group mb-3">
+          <label for="domaine" class="form-label">Domaine</label>
+          <input 
+            type="text" 
+            class="form-control"
+            id="domaine"
+            formControlName="domaine"
+            [class.is-invalid]="entretienForm.get('domaine')?.invalid && entretienForm.get('domaine')?.touched"
+          >
+          <div *ngIf="entretienForm.get('domaine')?.invalid && entretienForm.get('domaine')?.touched" class="invalid-feedback">
+            <div *ngIf="entretienForm.get('domaine')?.errors?.['required']">
+              Le domaine est obligatoire
+            </div>
+            <div *ngIf="entretienForm.get('domaine')?.errors?.['maxlength']">
+              Maximum 50 caractères
+            </div>
           </div>
-          <button [disabled]="!entretienForm.valid" class="btn btn-success">Ajouter</button>
-        </form>
+        </div>
+
+        <!-- Champ Questions -->
+        <div class="form-group mb-4">
+          <label for="questions" class="form-label">Questions</label>
+          <textarea
+            class="form-control"
+            id="questions"
+            formControlName="questions"
+            rows="8"
+            [class.is-invalid]="entretienForm.get('questions')?.invalid && entretienForm.get('questions')?.touched"
+          ></textarea>
+          <div *ngIf="entretienForm.get('questions')?.invalid && entretienForm.get('questions')?.touched" class="invalid-feedback">
+            <div *ngIf="entretienForm.get('questions')?.errors?.['required']">
+              Les questions sont obligatoires
+            </div>
+            <div *ngIf="entretienForm.get('questions')?.errors?.['maxlength']">
+              Maximum 500 caractères
+            </div>
+          </div>
+        </div>
+
+        <!-- Boutons -->
+        <div class="d-flex gap-2">
+          <button 
+            type="submit" 
+            class="btn btn-primary"
+            [disabled]="entretienForm.invalid || loading"
+          >
+            <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status"></span>
+            {{ editMode ? 'Modifier' : 'Créer' }}
+          </button>
+          
+          <button 
+            type="button" 
+            class="btn btn-outline-secondary"
+            (click)="onCancel()"
+            >
+            Annuler
+          </button>
+        </div>
+      </form>
     </div>
+  </div>
 </div>

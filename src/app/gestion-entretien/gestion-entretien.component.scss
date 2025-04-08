@@ -1,3 +1,13 @@
-button{
-  margin-left: 10px;
+/* gestion-entretien.component.scss */
+.pre-wrap-text {
+  white-space: pre-wrap;
+  max-width: 600px;
+}
+
+.bi-trash {
+  margin-right: 0.5rem;
+}
+
+.text-muted {
+  opacity: 0.7;
 }

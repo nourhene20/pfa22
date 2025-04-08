@@ -1,33 +1,56 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 import { Entretien } from './entretien.entree';
-import { Subject } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class EntretienService {
- entretienSubject=new Subject<Entretien[]>();
-  entretiens :Entretien[]=
-  [new Entretien("Java","Wowwwww"),
-    new Entretien("Marketing"	,"ewwwwwwww"),
-    new Entretien("dffdfdf"	,"dffdfdf")
-  ]
+  private apiUrl = 'http://localhost:5000/entretien';
+  private entretienSubject = new BehaviorSubject<Entretien[]>([]);
+  public entretiens$ = this.entretienSubject.asObservable();
 
-onDelete(index:number){
-  this.entretiens.splice(index,1);
-  this.entretienSubject.next(this.entretiens);
-}
-onAddEntretien(entretien:Entretien){
-  this.entretiens.push(entretien);
-  this.entretienSubject.next(this.entretiens);
-}
-getEntretien(index:number){
-  return {...this.entretiens[index]};
-}
-getEntretiens(){
-  return this.entretiens;
-}
+  constructor(private http: HttpClient) { }
 
+  loadEntretiens(): void {
+    this.http.get<{ entretiens: any[] }>(this.apiUrl)
+      .pipe(
+        map(response => response.entretiens.map(this.mapToEntretien)),
+        tap(entretiens => this.entretienSubject.next(entretiens)),
+        catchError(error => this.handleError('Chargement', error))
+      ).subscribe();
+  }
 
-  constructor() { }
+  createEntretien(entretien: Entretien): Observable<Entretien> {
+    return this.http.post<Entretien>(this.apiUrl, entretien)
+      .pipe(tap(() => this.loadEntretiens()));
+  }
+
+  updateEntretien(id: string, entretien: Entretien): Observable<Entretien> {
+    return this.http.put<Entretien>(`${this.apiUrl}/${id}`, entretien)
+      .pipe(tap(() => this.loadEntretiens()));
+  }
+
+  deleteEntretien(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`)
+      .pipe(tap(() => this.loadEntretiens()));
+  }
+
+  getEntretien(id: string): Observable<Entretien> {
+    return this.http.get<Entretien>(`${this.apiUrl}/${id}`)
+      .pipe(map(this.mapToEntretien));
+  }
+
+  private mapToEntretien(entry: any): Entretien {
+    return {
+      id: entry._id,
+      domaine: entry.domaine,
+      questions: entry.questions
+    };
+  }
+
+  private handleError(operation: string, error: any): Observable<never> {
+    console.error(`${operation} error:`, error);
+    return throwError(() => new Error('Une erreur est survenue'));
+  }
 }

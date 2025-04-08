@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
 
 
 import { RouterOutlet } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @Component({
@@ -13,6 +14,8 @@ import { RouterOutlet } from '@angular/router';
   imports: [
     RouterOutlet,
   ReactiveFormsModule,
+  HttpClientModule,
+  
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
