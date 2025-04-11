@@ -47,7 +47,7 @@ app.put('/entretien/:id', async (req, res) => {
     const updatedEntretien = await EntretienModel.findByIdAndUpdate(
       req.params.id,
       req.body,
-      { new: true }
+      { new: true, runValidators: true }
     );
     res.json(updatedEntretien);
   } catch (error) {
