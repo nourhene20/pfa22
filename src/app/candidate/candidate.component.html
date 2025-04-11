@@ -1,0 +1,68 @@
+<div class="container">
+    <h1>Gestion des Candidats</h1>
+    <form [formGroup]="candidateForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="cin">CIN :</label>
+        <input id="cin" type="text" formControlName="cin">
+      </div>
+      <div>
+        <label for="nom">Nom :</label>
+        <input id="nom" type="text" formControlName="nom">
+      </div>
+      <div>
+        <label for="prenom">Prénom :</label>
+        <input id="prenom" type="text" formControlName="prenom">
+      </div>
+      <div>
+        <label for="email">Email :</label>
+        <input id="email" type="email" formControlName="email">
+      </div>
+      <div>
+        <label for="domaine">Domaine :</label>
+        <input id="domaine" type="text" formControlName="domaine">
+      </div>
+      <div>
+        <label for="telephone">Téléphone :</label>
+        <input id="telephone" type="text" formControlName="telephone">
+      </div>
+      <div>
+        <label for="diplome">Diplôme :</label>
+        <input id="diplome" type="text" formControlName="diplome">
+      </div>
+      <div>
+        <button type="submit">{{ isEditMode ? 'Modifier' : 'Ajouter' }}</button>
+        <button type="button" (click)="cancelEdit()" *ngIf="isEditMode">Annuler</button>
+      </div>
+    </form>
+  
+    <h2>Liste des Candidats</h2>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>CIN</th>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Email</th>
+          <th>Domaine</th>
+          <th>Téléphone</th>
+          <th>Diplôme</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let candidate of candidates">
+          <td>{{ candidate.cin }}</td>
+          <td>{{ candidate.nom }}</td>
+          <td>{{ candidate.prenom }}</td>
+          <td>{{ candidate.email }}</td>
+          <td>{{ candidate.domaine }}</td>
+          <td>{{ candidate.telephone }}</td>
+          <td>{{ candidate.diplome }}</td>
+          <td>
+            <button (click)="editCandidate(candidate)">Modifier</button>
+            <button (click)="deleteCandidate(candidate.cin)">Supprimer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

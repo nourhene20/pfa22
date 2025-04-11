@@ -4,10 +4,11 @@ import { EntretienService } from '../Shared/entretien.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Entretien } from '../Shared/entretien.entree';
 import { Subject, Subscription, takeUntil } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-ajout-entretien',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,CommonModule],
   templateUrl: './ajout-entretien.component.html',
   styleUrls: ['./ajout-entretien.component.scss']
 })
@@ -93,4 +94,5 @@ export class AjoutEntretienComponent implements OnInit, OnDestroy {
   onCancel(): void {
   this.router.navigate(['/']);
 }
+
 }
