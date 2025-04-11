@@ -60,7 +60,7 @@ export class AjoutEntretienComponent implements OnInit, OnDestroy {
           this.entretienForm.patchValue(entretien);
           this.loading = false;
         },
-        error: () => this.router.navigate(['/'])
+        error: () => this.router.navigate(['/gestion-entretien'])
       });
   }
 
@@ -80,7 +80,7 @@ export class AjoutEntretienComponent implements OnInit, OnDestroy {
     operation$
       .pipe(takeUntil(this.destroy$))
       .subscribe({
-        next: () => this.router.navigate(['/']),
+        next: () => this.router.navigate(['/gestion_entretien']),
         error: () => this.loading = false,
         complete: () => this.loading = false
       });
@@ -92,7 +92,7 @@ export class AjoutEntretienComponent implements OnInit, OnDestroy {
     this.subscription?.unsubscribe();
   }
   onCancel(): void {
-  this.router.navigate(['/']);
+  this.router.navigate(['//gestion_entretien']);
 }
 
 }

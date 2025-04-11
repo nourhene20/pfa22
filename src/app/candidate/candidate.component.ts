@@ -4,11 +4,12 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Candidate } from '../Shared/candidate.model';
 import { CandidateService } from '../Shared/candidate.service';
+import { NavBarComponent } from '../nav-bar/nav-bar.component';
 
 
 @Component({
   selector: 'app-candidate',
-  imports: [CommonModule, ReactiveFormsModule, HttpClientModule],
+  imports: [CommonModule, ReactiveFormsModule, HttpClientModule,NavBarComponent],
   templateUrl: './candidate.component.html',
   styleUrls: ['./candidate.component.scss']
 })

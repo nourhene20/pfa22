@@ -1,40 +1,65 @@
+<app-nav-bar></app-nav-bar>
 <div class="container mt-4">
-    <h2 class="mb-4">Gestion des entretiens</h2>
-  
-    <div class="table-responsive">
-      <table class="table table-bordered table-hover">
-        <thead class="table-light">
-          <tr>
-            <th scope="col">Domaine</th>
-            <th scope="col">Questions</th>
-            <th scope="col" class="text-end">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- État de chargement -->
-          <tr *ngIf="entretiens.length === 0">
-            <td colspan="3" class="text-center text-muted py-4">
-              Chargement des entretiens...
-            </td>
-          </tr>
-  
-          <!-- Liste des entretiens -->
-          <tr *ngFor="let entretien of entretiens; trackBy: trackById">
-            <td class="align-middle">{{ entretien.domaine }}</td>
-            <td class="align-middle pre-wrap-text">{{ entretien.questions }}</td>
-            <td class="text-end">
-              <div class="d-flex gap-2 justify-content-end">
-                <button 
-                  (click)="onDelete(entretien.id)" 
-                  class="btn btn-danger btn-sm"
-                  title="Supprimer cet entretien"
-                >
+  <h2 class="mb-4">Gestion des entretiens</h2>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+      <thead class="table-light">
+        <tr>
+          <th scope="col">Domaine</th>
+          <th scope="col">Questions</th>
+          <th scope="col" class="text-end">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="entretiens.length === 0">
+          <td colspan="3" class="text-center text-muted py-4">
+            Chargement des entretiens...
+          </td>
+        </tr>
+
+        <tr *ngFor="let entretien of entretiens; trackBy: trackById">
+          <td class="align-middle">
+            <span *ngIf="editingId !== entretien.id">{{ entretien.domaine }}</span>
+            <input *ngIf="editingId === entretien.id" 
+                   type="text" 
+                   class="form-control"
+                   [(ngModel)]="editedEntretien.domaine">
+          </td>
+          <td class="align-middle">
+            <span *ngIf="editingId !== entretien.id" class="pre-wrap-text">{{ entretien.questions }}</span>
+            <textarea *ngIf="editingId === entretien.id"
+                      class="form-control"
+                      rows="3"
+                      [(ngModel)]="editedEntretien.questions"></textarea>
+          </td>
+          <td class="text-end">
+            <div class="d-flex gap-2 justify-content-end">
+              <div *ngIf="editingId !== entretien.id; else editMode">
+                <button (click)="onEdit(entretien)" 
+                        class="btn btn-primary btn-sm">
+                  <i class="bi bi-pencil"></i> Modifier
+                </button>
+                <button (click)="onDelete(entretien.id)" 
+                        class="btn btn-danger btn-sm">
                   <i class="bi bi-trash"></i> Supprimer
                 </button>
               </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+              
+              <ng-template #editMode>
+                <button (click)="onSave()" 
+                        class="btn btn-success btn-sm">
+                  <i class="bi bi-check"></i> Sauvegarder
+                </button>
+                <button (click)="onCancel()" 
+                        class="btn btn-secondary btn-sm">
+                  <i class="bi bi-x"></i> Annuler
+                </button>
+              </ng-template>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+</div>
