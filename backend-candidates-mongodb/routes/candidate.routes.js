@@ -7,8 +7,15 @@ router.get('/', async (req, res) => {
   const candidates = await Candidate.find();
   res.json(candidates);
 });
-
-// POST add candidate
+// GET distinct domaines
+router.get('/domaines', async (req, res) => {
+  try {
+    const domaines = await Candidate.distinct('domaine');
+    res.status(200).json(domaines);
+  } catch (error) {
+    res.status(500).json({ message: 'Erreur lors de la récupération des domaines', error });
+  }
+});
 router.post('/', async (req, res) => {
   try {
     const exists = await Candidate.findOne({ cin: req.body.cin });

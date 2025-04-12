@@ -1,19 +1,23 @@
 import { Component } from '@angular/core';
-import { ReactiveFormsModule, FormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { AdminDashboardComponent } from '../admin-dashboard/admin-dashboard.component';
 
 @Component({
   selector: 'app-admin-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule,AdminDashboardComponent],
   templateUrl: './admin-login.component.html',
   styleUrls: ['./admin-login.component.scss']
 })
 export class AdminLoginComponent {
   loginForm: FormGroup;
   errorMessage = '';
+  successMessage = '';
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router) {
+    // Initialisation du formulaire avec validation
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
@@ -23,13 +27,17 @@ export class AdminLoginComponent {
   onSubmit() {
     const { email, password } = this.loginForm.value;
 
-    // Simple vérification statique (remplace par appel API dans un vrai projet)
+    // ✅ Vérification statique (à remplacer par une requête API plus tard)
     if (email === 'admin@example.com' && password === 'admin123') {
-      console.log('Admin connecté');
+      this.successMessage = 'Connexion réussie ! Redirection...';
       this.errorMessage = '';
-      // Redirection ou affichage d'une page admin ici
+
+      setTimeout(() => {
+        this.router.navigate(['/admin']);
+      }, 1000);
     } else {
-      this.errorMessage = 'Email ou mot de passe incorrect';
+      this.errorMessage = 'Identifiants incorrects';
+      this.successMessage = '';
     }
   }
 }
