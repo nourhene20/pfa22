@@ -92,7 +92,7 @@ export class AjoutEntretienComponent implements OnInit, OnDestroy {
     this.subscription?.unsubscribe();
   }
   onCancel(): void {
-  this.router.navigate(['//gestion_entretien']);
+  this.router.navigate(['/gestion_entretien']);
 }
 
 }

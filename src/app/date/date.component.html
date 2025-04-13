@@ -1,0 +1,18 @@
+<div class="date-picker-container">
+    <h3>📅 Sélection des dates</h3>
+  
+    <label for="startDate">Date de début :</label>
+    <input type="date" id="startDate" [(ngModel)]="startDate">
+  
+    <label for="endDate">Date de fin :</label>
+    <input type="date" id="endDate" [(ngModel)]="endDate">
+  
+    <div *ngIf="startDate && endDate" class="result">
+      <div>
+        <p>🟢 Période sélectionnée :</p>
+        <strong>Du {{ startDate }} au {{ endDate }}</strong>
+      </div>
+      <button class="btn-next" (click)="onNext()">Next ➡️</button>
+    </div>
+  </div>
+  

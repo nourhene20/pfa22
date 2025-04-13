@@ -6,6 +6,7 @@ import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { CandidatsComponent } from './candidats/candidats.component';
+import { DateComponent } from './date/date.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -16,4 +17,5 @@ export const routes: Routes = [
   { path: 'login', component: AdminLoginComponent },
   { path: 'nav', component: NavBarComponent },
   { path: 'candidats', component: CandidatsComponent },
+  {path:'date',component:DateComponent},
 ];
