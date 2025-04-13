@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import path from 'node:path';
 import { GestionEntretienComponent } from './gestion-entretien/gestion-entretien.component';
 import { AjoutEntretienComponent } from './ajout-entretien/ajout-entretien.component';
 import { CandidateComponent } from './candidate/candidate.component';
@@ -8,19 +7,13 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { CandidatsComponent } from './candidats/candidats.component';
 
-
-
-
-
 export const routes: Routes = [
-   { path: '', redirectTo: 'login', pathMatch: 'full' },
-   {path:'gestion_entretien', component:GestionEntretienComponent},
-    {path:'ajout_entretien', component:AjoutEntretienComponent},
-    {path:"candidate",component:CandidateComponent},
-    {path:"admin",component:AdminDashboardComponent},
-    {path:"login",component:AdminLoginComponent},
-    {path:"nav",component:NavBarComponent},
-    { path: 'candidats', component: CandidatsComponent },
-    //{path:"domaines",component:AdminDashboardComponent},
-  //  {path: '',redirectTo: 'nav',pathMatch: 'full'}
-   ];
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'gestion_entretien', component: GestionEntretienComponent },
+  { path: 'ajout_entretien', component: AjoutEntretienComponent },
+  { path: 'candidate', component: CandidateComponent },
+  { path: 'admin', component: AdminDashboardComponent },
+  { path: 'login', component: AdminLoginComponent },
+  { path: 'nav', component: NavBarComponent },
+  { path: 'candidats', component: CandidatsComponent },
+];
