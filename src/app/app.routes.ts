@@ -5,6 +5,9 @@ import { AjoutEntretienComponent } from './ajout-entretien/ajout-entretien.compo
 import { CandidateComponent } from './candidate/candidate.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { CandidatsComponent } from './candidats/candidats.component';
+
 
 
 
@@ -13,8 +16,11 @@ export const routes: Routes = [
    { path: '', redirectTo: 'login', pathMatch: 'full' },
    {path:'gestion_entretien', component:GestionEntretienComponent},
     {path:'ajout_entretien', component:AjoutEntretienComponent},
-    {path:"edit/:id",component:AjoutEntretienComponent},
     {path:"candidate",component:CandidateComponent},
     {path:"admin",component:AdminDashboardComponent},
-    {path:"login",component:AdminLoginComponent}
+    {path:"login",component:AdminLoginComponent},
+    {path:"nav",component:NavBarComponent},
+    { path: 'candidats', component: CandidatsComponent },
+    //{path:"domaines",component:AdminDashboardComponent},
+  //  {path: '',redirectTo: 'nav',pathMatch: 'full'}
    ];

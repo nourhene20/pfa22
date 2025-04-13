@@ -1,0 +1,33 @@
+<div class="container mt-4">
+    <h2 class="mb-3">Candidats du domaine : {{ domaine }}</h2>
+  
+    <form (ngSubmit)="onSubmitSelection()">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Choisir</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let candidat of candidats">
+            <td><input type="checkbox" [(ngModel)]="candidat.selected" name="candidat_{{ candidat._id }}"></td>
+            <td>{{ candidat.nom }}</td>
+            <td>{{ candidat.prenom }}</td>
+            <td>{{ candidat.email }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="btn btn-success" type="submit">Valider la sélection</button>
+    </form>
+    <div *ngIf="generatedLinks && generatedLinks.length > 0">
+        <h4>🔗 Liens personnalisés générés :</h4>
+        <ul>
+          <li *ngFor="let link of generatedLinks">
+            <a [href]="link" target="_blank">{{ link }}</a>
+          </li>
+        </ul>
+      </div>
+  </div>

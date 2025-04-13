@@ -1,3 +1,7 @@
+// ============================
+// 1. candidate.routes.js (Backend Express)
+// ============================
+
 const express = require('express');
 const router = express.Router();
 const Candidate = require('../models/candidate.model');
@@ -7,7 +11,8 @@ router.get('/', async (req, res) => {
   const candidates = await Candidate.find();
   res.json(candidates);
 });
-// GET distinct domaines
+
+// GET distinct domaines from candidates
 router.get('/domaines', async (req, res) => {
   try {
     const domaines = await Candidate.distinct('domaine');
@@ -16,6 +21,18 @@ router.get('/domaines', async (req, res) => {
     res.status(500).json({ message: 'Erreur lors de la récupération des domaines', error });
   }
 });
+
+// GET candidates by domaine
+router.get('/domaine/:domaine', async (req, res) => {
+  try {
+    const candidats = await Candidate.find({ domaine: req.params.domaine });
+    res.status(200).json(candidats);
+  } catch (error) {
+    res.status(500).json({ message: 'Erreur lors de la récupération des candidats', error });
+  }
+});
+
+// POST create candidate
 router.post('/', async (req, res) => {
   try {
     const exists = await Candidate.findOne({ cin: req.body.cin });

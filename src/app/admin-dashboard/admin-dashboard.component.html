@@ -3,7 +3,7 @@
 <div class="dashboard-container">
   <h2>Dashboard Admin</h2>
 
-  <label for="domaine">📚 Domaine du candidat :</label>
+  <label for="domaine">📚 Domaine des entretiens :</label>
   <select id="domaine" [(ngModel)]="selectedDomaine">
     <option value="" disabled selected>-- Choisir un domaine --</option>
     <option *ngFor="let domaine of domaines" [value]="domaine">
@@ -13,5 +13,6 @@
 
   <div *ngIf="selectedDomaine">
     <p>✅ Domaine sélectionné : <strong>{{ selectedDomaine }}</strong></p>
+    <button class="btn btn-primary mt-2" (click)="goToCandidats()">Suivant</button>
   </div>
 </div>

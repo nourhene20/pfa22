@@ -2,12 +2,11 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { AdminDashboardComponent } from '../admin-dashboard/admin-dashboard.component';
 
 @Component({
   selector: 'app-admin-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule,AdminDashboardComponent],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './admin-login.component.html',
   styleUrls: ['./admin-login.component.scss']
 })

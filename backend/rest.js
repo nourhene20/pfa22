@@ -6,23 +6,18 @@ const EntretienModel = require('./entry-schema');
 const app = express();
 const port = process.env.PORT || 5000;
 
-// Middleware
-app.use(cors({
-  origin: 'http://localhost:4200',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
+// ✅ Middleware
+app.use(cors());
 app.use(express.json());
 
-// Connexion MongoDB
-mongoose.connect("mongodb://localhost:27017/entretiens", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
-.then(() => console.log('Connecté à MongoDB'))
-.catch(err => console.error('Erreur MongoDB:', err));
+// ✅ Connexion à MongoDB
+mongoose.connect("mongodb://localhost:27017/entretiens")
+  .then(() => console.log('✅ Connecté à MongoDB'))
+  .catch(err => console.error('❌ Erreur MongoDB :', err));
 
-// Routes
+// ✅ Routes
+
+// Obtenir tous les entretiens
 app.get('/entretien', async (req, res) => {
   try {
     const entretiens = await EntretienModel.find();
@@ -31,7 +26,12 @@ app.get('/entretien', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+app.get('/entretien/domaines', async (req, res) => {
+  const domaines = await EntretienModel.distinct('domaine');
+  res.status(200).json(domaines);
+});
 
+// Ajouter un entretien
 app.post('/entretien', async (req, res) => {
   try {
     const newEntretien = new EntretienModel(req.body);
@@ -42,6 +42,7 @@ app.post('/entretien', async (req, res) => {
   }
 });
 
+// Modifier un entretien
 app.put('/entretien/:id', async (req, res) => {
   try {
     const updatedEntretien = await EntretienModel.findByIdAndUpdate(
@@ -55,6 +56,7 @@ app.put('/entretien/:id', async (req, res) => {
   }
 });
 
+// Supprimer un entretien
 app.delete('/entretien/:id', async (req, res) => {
   try {
     await EntretienModel.findByIdAndDelete(req.params.id);
@@ -64,6 +66,7 @@ app.delete('/entretien/:id', async (req, res) => {
   }
 });
 
+// ✅ Démarrer le serveur
 app.listen(port, () => {
-  console.log(`Serveur démarré sur le port ${port}`);
+  console.log(`🚀 Serveur démarré sur le port ${port}`);
 });
