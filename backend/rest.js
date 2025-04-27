@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const EntretienModel = require('./entry-schema');
+const EntretienModel = require('./entry-schema'); // Assurez-vous que ce fichier existe
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -26,9 +26,20 @@ app.get('/entretien', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-app.get('/entretien/domaines', async (req, res) => {
-  const domaines = await EntretienModel.distinct('domaine');
-  res.status(200).json(domaines);
+
+// Obtenir les entretiens par domaine
+app.get('/entretien/domaines/:domaine', async (req, res) => {
+  const { domaine } = req.params;
+  try {
+    const entretien = await EntretienModel.findOne({ domaine });
+    if (entretien) {
+      res.json({ questions: entretien.questions });
+    } else {
+      res.status(404).json({ error: 'Domaine non trouvé' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
 // Ajouter un entretien
