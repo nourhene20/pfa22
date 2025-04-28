@@ -1,0 +1,89 @@
+/* Style général */
+nav {
+    background-color: #224955;
+    padding: 10px;
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  nav a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  nav a:hover {
+    text-decoration: underline;
+  }
+  
+  .main-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 50px;
+  }
+  
+  .form-container {
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(34, 73, 85, 0.2);
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  h2 {
+    color: #224955;
+    margin-bottom: 20px;
+  }
+  
+  .form-label {
+    color: #224955;
+    font-weight: bold;
+  }
+  
+  .form-control {
+    border: 2px solid #224955;
+    border-radius: 5px;
+    padding: 8px;
+    width: 100%;
+  }
+  
+  .btn-success {
+    background-color: #224955;
+    border-color: #224955;
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+  
+  .btn-success:hover {
+    background-color: #2f5f6d;
+    border-color: #2f5f6d;
+  }
+  
+  footer {
+    background-color: #224955;
+    padding: 10px;
+    color: white;
+    text-align: center;
+  }
+  
+  footer a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+  }
+  
+  footer a:hover {
+    text-decoration: underline;
+  }
+  
+  .alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  

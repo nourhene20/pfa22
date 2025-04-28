@@ -6,9 +6,12 @@ import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { CandidatsComponent } from './candidats/candidats.component';
+import { HomeComponent } from './home/home.component';
+import { ReglageValiditeComponent } from './reglage-validite/reglage-validite.component';
+import { ResumeComponent } from './resume/resume.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'gestion_entretien', component: GestionEntretienComponent },
   { path: 'ajout_entretien', component: AjoutEntretienComponent },
   { path: 'candidate', component: CandidateComponent },
@@ -16,4 +19,8 @@ export const routes: Routes = [
   { path: 'login', component: AdminLoginComponent },
   { path: 'nav', component: NavBarComponent },
   { path: 'candidats', component: CandidatsComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'reglage-validite', component: ReglageValiditeComponent },
+  { path: 'resume', component: ResumeComponent },
+  
 ];

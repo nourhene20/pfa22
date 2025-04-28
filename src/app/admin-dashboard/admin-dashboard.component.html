@@ -1,5 +1,7 @@
-<app-navbar></app-navbar>
-
+<nav style="background-color: #224955; padding: 15px; color: white; display: flex; justify-content: flex-end; align-items: center;"> 
+  <button class="btn btn-primary mt-2"  (click)="navigateTo('candidate')" style="color: white; text-decoration: none; margin-right: 20px;">👤 Candidats</button>
+  <button  class="btn btn-primary mt-2"  (click)="navigateTo('gestion_entretien')" style="color: white; text-decoration: none; margin-right: 20px;">🗓️ Entretiens</button>
+</nav>
 <div class="dashboard-container">
   <h2>Dashboard Admin</h2>
 
@@ -13,6 +15,9 @@
 
   <div *ngIf="selectedDomaine">
     <p>✅ Domaine sélectionné : <strong>{{ selectedDomaine }}</strong></p>
-    <button class="btn btn-primary mt-2" (click)="goToCandidats()">Suivant</button>
+    <button (click)="goToCandidats()">Suivant</button>
   </div>
 </div>
+<footer style="background-color: #224955; padding: 10px; color: white; text-align: center; position: fixed; bottom: 0; left: 0; width: 100%;">
+  <a routerLink="/about" style="color: white; text-decoration: none;">About Us</a>
+</footer>

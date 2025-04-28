@@ -1,35 +1,92 @@
+nav {
+  background-color: #224955;
+  padding: 10px;
+  color: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
 .dashboard-container {
-    padding: 40px;
-    background-color: #f8f9fa;
-    min-height: 100vh;
-  }
+  background-color: #f5f5f5;
+  min-height: calc(100vh - 100px); /* Laisse la place pour le navbar et footer */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+
+.dashboard-container h2 {
+  color: #224955;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+label {
+  color: #224955;
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+select {
+  width: 300px;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+select:focus {
+  outline: none;
+  border-color: #224955;
+}
+
+p {
+  color: #224955;
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+button {
+  background-color: #224955;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  margin-top: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #1a3540;
+}
+footer {
+  background-color: #224955;
+  padding: 10px;
+  color: white;
+  text-align: center;
   
-  h2 {
-    color: #1976d2;
-    margin-bottom: 20px;
-  }
-  
-  select {
-    padding: 10px;
-    font-size: 16px;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    width: 300px;
-  }
-  
-  p {
-    margin-top: 20px;
-    font-size: 16px;
-    color: #1976d2;
-  } 
-  
-  label {
-    font-weight: bold;
-    font-size: 18px;
-  } 
-  
-  button {
-    font-size: 16px;
-    padding: 8px 16px;
-  } 
-  
+}
+
+footer a {
+  color: white;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}

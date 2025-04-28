@@ -1,0 +1,31 @@
+<div class="container">
+    <h2>Résumé des informations</h2>
+  
+    <div class="summary-card">
+      <div class="summary-section">
+        <strong>Domaine sélectionné :</strong>
+        <p>{{ domaine }}</p>
+      </div>
+  
+      <div class="summary-section">
+        <strong>Emails sélectionnés :</strong>
+        <ul>
+          <li *ngFor="let email of selectedEmails">{{ email }}</li>
+        </ul>
+      </div>
+  
+      <div class="summary-section">
+        <strong>Liens générés :</strong>
+        <ul>
+          <li *ngFor="let lien of generatedLinks">{{ lien }}</li>
+        </ul>
+      </div>
+  
+      <div class="text-center">
+        <button (click)="envoyerLiens()">
+          ✉️ Envoyer les liens aux candidats
+        </button>
+      </div>
+    </div>
+  </div>
+  
