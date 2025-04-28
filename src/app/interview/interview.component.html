@@ -1,12 +1,17 @@
 <div class="container p-4">
   <h1 class="text-xl font-bold mb-4">Page Client - Interview</h1>
-
-  <video #videoPreview autoplay muted class="w-full mb-4 rounded border shadow"></video>
-
+  <p class="text-sm text-gray-600 mb-4">Pour une meilleure expérience, utilisez un casque avec microphone.</p>
+  <video #videoPreview autoplay class="w-full mb-4 rounded border shadow"></video>
   <div id="chatbox" class="p-4 bg-gray-100 rounded shadow">
     <h2 class="font-semibold mb-2">Dialogue</h2>
-    <div id="messages" class="space-y-2"></div>
+    <div id="messages" #messages class="space-y-2 max-h-96 overflow-y-auto">
+      <div *ngFor="let msg of messages" class="message" [ngClass]="msg.sender">
+        [{{ msg.timestamp }}] {{ msg.text }}
+      </div>
+    </div>
   </div>
-
-  <button id="startInterview" (click)="startInterview()">Démarrer l'entretien</button>
+  <button id="startInterview" *ngIf="!videoStream" (click)="startInterview()" 
+          class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+    Démarrer l'entretien
+  </button>
 </div>
