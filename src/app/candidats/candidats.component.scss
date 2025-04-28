@@ -1,33 +1,86 @@
 .container {
-    padding: 30px;
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 15px;
-  }
-  
-  th, td {
-    padding: 12px;
-    vertical-align: middle;
-  }
-  
-  th {
-    background-color: #f1f1f1;
-    font-weight: 600;
-  }
-  
-  button[type='submit'] {
-    font-size: 16px;
-    border: none;
-    border-radius: 6px;
-    transition: background-color 0.3s ease;
-  }
-  
-  button[type='submit']:hover {
-    background-color: #218838;
-  }
+  background-color: #f5f5f5;
+  min-height: calc(100vh - 100px); /* pour laisser place au navbar/footer */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 30px;
+}
+
+h2 {
+  color: #224955;
+  margin-bottom: 20px;
+}
+
+form {
+  width: 100%;
+  max-width: 900px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+table th, table td {
+  text-align: center;
+  padding: 12px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+}
+
+table th {
+  background-color: #224955;
+  color: white;
+}
+
+table tr:hover {
+  background-color: #f1f1f1;
+}
+
+input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+}
+
+button[type="submit"] {
+  background-color: #224955;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-top: 20px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button[type="submit"]:hover {
+  background-color: #1a3540;
+}
+
+h4 {
+  color: #224955;
+  margin-top: 30px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  margin-bottom: 10px;
+}
+
+ul li a {
+  color: #224955;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+ul li a:hover {
+  text-decoration: underline;
+}

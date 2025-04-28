@@ -35,6 +35,8 @@ export class InterviewComponent implements OnInit, AfterViewInit {
   constructor(private route: ActivatedRoute, private renderer: Renderer2) {}
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      this.domaine = params.get('domaine') || ''; });
     this.startInterviewButton = document.getElementById('startInterview') as HTMLButtonElement | null;
 
     this.route.paramMap.subscribe(params => {
@@ -63,7 +65,7 @@ export class InterviewComponent implements OnInit, AfterViewInit {
 
   loadQuestions(domaine: string): void {
     console.log('Fetching questions for domaine:', domaine);
-    fetch(`http://localhost:5000/entretien/domaines/${domaine}`)
+    fetch(`http://localhost:5000/entretien/domaines/${encodeURIComponent(domaine)}`)
       .then(response => {
         console.log('Fetch response status:', response.status);
         return response.json();

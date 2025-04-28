@@ -41,7 +41,15 @@ app.get('/entretien/domaines/:domaine', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-
+app.get('/entretien/domaines', async (req, res) => {
+  try {
+    const domaines = await EntretienModel.distinct('domaine');
+    res.json(domaines);
+  } catch (error) {
+    console.error('Erreur lors de la récupération des domaines :', error);
+    res.status(500).json({ error: 'Erreur lors de la récupération des domaines' });
+  }
+});
 // Ajouter un entretien
 app.post('/entretien', async (req, res) => {
   try {

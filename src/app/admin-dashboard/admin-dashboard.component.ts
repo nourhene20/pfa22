@@ -3,13 +3,11 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { NavbarComponent } from '../navbar/navbar.component';
-import { NavBarComponent } from '../nav-bar/nav-bar.component';
 
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule, RouterModule, NavBarComponent],
+  imports: [CommonModule, FormsModule, HttpClientModule, RouterModule],
   templateUrl: './admin-dashboard.component.html',
   styleUrls: ['./admin-dashboard.component.scss']
 })
@@ -29,7 +27,10 @@ export class AdminDashboardComponent implements OnInit {
 
   goToCandidats(): void {
     if (this.selectedDomaine) {
-      this.router.navigate(['/date'], { queryParams: { domaine: this.selectedDomaine } });
+      this.router.navigate(['/candidats'], { queryParams: { domaine: this.selectedDomaine } });
     }
+  }
+  navigateTo(path: string) {
+    this.router.navigate([`/${path}`]);
   }
 }

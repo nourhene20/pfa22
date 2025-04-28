@@ -1,0 +1,54 @@
+nav {
+    background-color: #224955;
+    padding: 10px;
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  nav a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  nav a:hover {
+    text-decoration: underline;
+  }
+  
+  .main-content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 80vh;
+    padding: 50px;
+  }
+  
+  .main-content h1, .main-content p {
+    color: #224955;
+  }
+  
+  .main-content img {
+    max-width: 500px;
+    border-radius: 10px;
+  }
+  
+  footer {
+    background-color: #224955;
+    padding: 10px;
+    color: white;
+    text-align: center;
+    
+  }
+  
+  footer a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+  }
+  
+  footer a:hover {
+    text-decoration: underline;
+  }
+
+  
