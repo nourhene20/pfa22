@@ -50,7 +50,7 @@ app.post('/api/send-links', async (req, res) => {
         }
 
         const mailOptions = {
-          from: `"Entretien" <${adminEmail}>`,
+          from: `"Administration" <${adminEmail}>`,
           to: email,
           subject: 'Votre lien personnalisé',
           html: `<p>Bonjour,</p><p>Voici votre lien d'entretien : <a href="${lien}">${lien}</a></p><p>Merci.</p>`
