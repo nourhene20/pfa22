@@ -5,9 +5,9 @@
   <div id="chatbox" class="p-4 bg-gray-100 rounded shadow">
     <h2 class="font-semibold mb-2">Dialogue</h2>
     <div id="messages" #messages class="space-y-2 max-h-96 overflow-y-auto">
-      <div *ngFor="let msg of messages" class="message" [ngClass]="msg.sender">
-        [{{ msg.timestamp }}] {{ msg.text }}
-      </div>
+      <div *ngFor="let msg of messages || []" class="message" [ngClass]="msg.sender">
+        {{ msg.timestamp }}: {{ msg.text }}
+    </div>
     </div>
   </div>
   <button id="startInterview" *ngIf="!videoStream" (click)="startInterview()" 
