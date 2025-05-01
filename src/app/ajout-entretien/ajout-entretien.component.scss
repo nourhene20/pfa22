@@ -1,12 +1,42 @@
-.auto-wrap {
-    font-size: 1rem; /* Taille normale */
-    white-space: pre-wrap; /* Conserve les sauts de ligne */
-    word-wrap: break-word; /* Casse les mots longs */
-    overflow-wrap: break-word; /* Nouvelle version de word-wrap */
-    line-height: 1.5; /* Espacement entre les lignes */
+.drop-zone {
+  border: 2px dashed #ced4da;
+  border-radius: 4px;
+  padding: 20px;
+  text-align: center;
+  background: #f8f9fa;
+  transition: border-color 0.2s, background 0.2s;
+
+  &:hover,
+  &.dragover {
+    border-color: #007bff;
+    background: #e9ecef;
   }
-  
-  .auto-wrap:focus {
-    border-color: #86b7fe;
-    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+
+  &.is-invalid {
+    border-color: #dc3545;
   }
+}
+
+.drop-message {
+  margin: 0;
+  color: #6c757d;
+}
+
+.file-input {
+  display: block;
+  margin: 10px auto;
+  padding: 5px;
+}
+
+.text-danger {
+  font-size: 0.875em;
+}
+
+.invalid-feedback {
+  display: block;
+}
+
+/* Ensure textarea fits within drop zone */
+.form-control {
+  width: 100%;
+}

@@ -1,137 +1,90 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const multer = require('multer');
 const cors = require('cors');
-const bodyParser = require('body-parser');
+const { GridFSBucket } = require('mongodb');
 
-// Configuration de l'application
 const app = express();
+const upload = multer({ limits: { fileSize: 100 * 1024 * 1024 } }); // 100MB
 
-// Middleware CORS amélioré
-app.use(cors({
-  origin: 'http://localhost:4200',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type']
-}));
+// Middleware
+app.use(cors());
+app.use(express.json());
 
-app.use(bodyParser.json());
-
-// Connexion MongoDB avec options modernes
-mongoose.connect('mongodb://localhost:27017/entretiens', {
+// Connexion MongoDB
+mongoose.connect('mongodb://localhost:27017/interviewDB', {
   useNewUrlParser: true,
-  useUnifiedTopology: true,
-  serverSelectionTimeoutMS: 5000
-})
-.then(() => console.log('Connecté à MongoDB avec succès'))
-.catch(err => console.error('Erreur de connexion MongoDB:', err));
+  useUnifiedTopology: true
+});
 
-// Modèle Mongoose avec validation
-const entretienSchema = new mongoose.Schema({
-  domaine: {
+// Schéma Mongoose avec GridFS
+const interviewSchema = new mongoose.Schema({
+  candidateId: {
     type: String,
-    required: [true, 'Le domaine est obligatoire']
+    required: true,
+    match: /^[a-f\d]{24}$/i
   },
-  questions: {
+  responses: {
     type: String,
-    required: [true, 'Les questions sont obligatoires']
+    required: true
+  },
+  videoId: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true
+  },
+  date: {
+    type: Date,
+    default: Date.now
   }
 });
 
-const Entretien = mongoose.model('Entretien', entretienSchema, 'entretien');
+const Interview = mongoose.model('Interview', interviewSchema);
 
-// Middleware de gestion d'erreurs centralisé
-const handleError = (res, err) => {
-  console.error(err);
-  res.status(500).json({
-    success: false,
-    message: err.message || 'Erreur serveur'
-  });
-};
-
-// Routes
-app.get('/entretien', async (req, res) => {
-  try {
-    const entretiens = await Entretien.find().lean();
-    res.json({
-      success: true,
-      data: entretiens
-    });
-  } catch (err) {
-    handleError(res, err);
-  }
+// Configuration GridFS
+let gfs;
+const conn = mongoose.connection;
+conn.once('open', () => {
+  gfs = new GridFSBucket(conn.db, { bucketName: 'videos' });
 });
 
-app.post('/entretien', async (req, res) => {
+// Route d'upload
+app.post('/api/interviews', upload.single('video'), async (req, res) => {
   try {
-    const entretien = new Entretien(req.body);
-    const result = await entretien.save();
-    res.status(201).json({
-      success: true,
-      data: result
-    });
-  } catch (err) {
-    handleError(res, err);
-  }
-});
-
-app.put('/entretien/:id', async (req, res) => {
-  try {
-    const updated = await Entretien.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true, runValidators: true }
-    );
-    
-    if (!updated) {
-      return res.status(404).json({
-        success: false,
-        message: 'Entretien non trouvé'
-      });
+    if (!req.file || !req.body.candidateId || !req.body.responses) {
+      return res.status(400).json({ error: 'Données manquantes' });
     }
-    
-    res.json({
-      success: true,
-      data: updated
-    });
-  } catch (err) {
-    handleError(res, err);
-  }
-});
 
-app.delete('/entretien/:id', async (req, res) => {
-  try {
-    const deleted = await Entretien.findByIdAndDelete(req.params.id);
-    
-    if (!deleted) {
-      return res.status(404).json({
-        success: false,
-        message: 'Entretien non trouvé'
+    const writeStream = gfs.openUploadStream(req.file.originalname);
+    const bufferStream = new require('stream').PassThrough();
+    bufferStream.end(req.file.buffer);
+
+    bufferStream.pipe(writeStream)
+      .on('finish', async () => {
+        const interview = new Interview({
+          candidateId: req.body.candidateId,
+          responses: req.body.responses,
+          videoId: writeStream.id
+        });
+        
+        await interview.save();
+        res.status(201).json({
+          message: 'Entretien sauvegardé',
+          interviewId: interview._id,
+          videoId: writeStream.id
+        });
+      })
+      .on('error', err => {
+        throw new Error(err);
       });
-    }
-    
-    res.json({
-      success: true,
-      message: 'Entretien supprimé avec succès'
-    });
-  } catch (err) {
-    handleError(res, err);
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Échec de la sauvegarde' });
   }
 });
 
-// Route de santé
-app.get('/', (req, res) => {
-  res.send('Serveur des entretiens opérationnel');
-});
-
-// Gestion des erreurs 404
-app.use((req, res) => {
-  res.status(404).json({
-    success: false,
-    message: 'Endpoint non trouvé'
-  });
-});
-
-// Démarrage du serveur
-const PORT = process.env.PORT || 5000;
+// Démarrer le serveur
+const PORT = process.env.PORT || 5200;
 app.listen(PORT, () => {
-  console.log(`Serveur démarré sur http://localhost:${PORT}`);
+  console.log(`Serveur en écoute sur le port ${PORT}`);
 });

@@ -5,11 +5,12 @@ import { Subject, Subscription, takeUntil } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NavBarComponent } from '../nav-bar/nav-bar.component';
+import { AjoutEntretienComponent } from '../ajout-entretien/ajout-entretien.component';
 
 @Component({
   selector: 'app-gestion-entretien',
   standalone: true,
-  imports: [CommonModule, FormsModule,NavBarComponent], 
+  imports: [CommonModule, FormsModule,NavBarComponent,AjoutEntretienComponent], 
   templateUrl: './gestion-entretien.component.html',
   styleUrls: ['./gestion-entretien.component.scss']
 })

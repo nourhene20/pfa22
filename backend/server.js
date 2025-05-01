@@ -18,3 +18,27 @@ const entrySchema = mongoose.Schema({
   }, { collection: 'entretien' }); // Spécification explicite de la collection
   
   module.exports = mongoose.model('Entretien', entretienSchema);
+  // Modèle amélioré avec validation
+const interviewSchema = new mongoose.Schema({
+  candidateId: {
+    type: String,
+    required: true,
+    index: true
+  },
+  responses: {
+    type: String,
+    required: true
+  },
+  video: {
+    type: Buffer,
+    required: true,
+    validate: {
+      validator: v => v.length < 100 * 1024 * 1024, // 100MB max
+      message: 'La vidéo dépasse la taille maximale autorisée'
+    }
+  },
+  date: {
+    type: Date,
+    default: Date.now
+  }
+});

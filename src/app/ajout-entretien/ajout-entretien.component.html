@@ -21,20 +21,49 @@
             <div *ngIf="entretienForm.get('domaine')?.errors?.['maxlength']">
               Maximum 50 caractères
             </div>
+            <div *ngIf="entretienForm.get('domaine')?.errors?.['duplicateDomaine']">
+              Ce domaine existe déjà
+            </div>
           </div>
         </div>
 
         <!-- Champ Questions -->
         <div class="form-group mb-4">
           <label for="questions" class="form-label">Questions</label>
-          <textarea
-            class="form-control"
-            id="questions"
-            formControlName="questions"
-            rows="8"
+          
+          <!-- Drag-and-Drop Zone -->
+          <div 
+            class="drop-zone"
+            (dragover)="onDragOver($event)"
+            (dragenter)="onDragEnter($event)"
+            (drop)="onDrop($event)"
             [class.is-invalid]="entretienForm.get('questions')?.invalid && entretienForm.get('questions')?.touched"
-          ></textarea>
-          <div *ngIf="entretienForm.get('questions')?.invalid && entretienForm.get('questions')?.touched" class="invalid-feedback">
+          >
+            <p class="drop-message">Glissez et déposez un fichier texte ici ou cliquez pour sélectionner</p>
+            <input 
+              type="file" 
+              accept=".txt" 
+              class="file-input"
+              (change)="onFileChange($event)"
+              aria-label="Sélectionner un fichier texte"
+            >
+            
+            <!-- Textarea for manual editing -->
+            <textarea
+              class="form-control mt-2"
+              id="questions"
+              formControlName="questions"
+              rows="8"
+              placeholder="Ou saisissez les questions manuellement"
+              [class.is-invalid]="entretienForm.get('questions')?.invalid && entretienForm.get('questions')?.touched"
+            ></textarea>
+          </div>
+
+          <!-- File Error Message -->
+          <div *ngIf="fileError" class="text-danger mt-1">{{ fileError }}</div>
+
+          <!-- Validation Feedback -->
+          <div *ngIf="entretienForm.get('questions')?.invalid && entretienForm.get('questions')?.touched" class="invalid-feedback d-block">
             <div *ngIf="entretienForm.get('questions')?.errors?.['required']">
               Les questions sont obligatoires
             </div>
@@ -59,7 +88,7 @@
             type="button" 
             class="btn btn-outline-secondary"
             (click)="onCancel()"
-            >
+          >
             Annuler
           </button>
         </div>
