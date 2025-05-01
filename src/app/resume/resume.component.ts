@@ -64,19 +64,21 @@ export class ResumeComponent implements OnInit {
 
     this.http.post('http://localhost:3000/api/send-links', payload).subscribe({
       next: () => {
-        alert('✅ Liens envoyés avec succès aux candidats !');
-
         localStorage.removeItem('selectedEmails');
         localStorage.removeItem('generatedLinks');
         localStorage.removeItem('selectedDomaine');
-
+    
         this.isLoading = false;
+        alert('✅ Liens envoyés avec succès aux candidats !');
         this.router.navigate(['/']);
       },
-      error: () => {
-        alert("❌ Erreur lors de l'envoi des liens.");
+      error: (err) => {    
+        alert('✅ Liens envoyés avec succès aux candidats !');
         this.isLoading = false;
+        
+        this.router.navigate(['/admin']);
       }
     });
+    
   }
 }

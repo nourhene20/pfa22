@@ -11,6 +11,7 @@ import { InterviewComponent } from './interview/interview.component';
 import { HomeComponent } from './home/home.component';
 import { ReglageValiditeComponent } from './reglage-validite/reglage-validite.component';
 import { ResumeComponent } from './resume/resume.component';
+import { LienInvalideComponent } from './lien-invalide.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -28,5 +29,6 @@ export const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'reglage-validite', component: ReglageValiditeComponent },
   { path: 'resume', component: ResumeComponent },
+  { path: 'invalide', component: LienInvalideComponent },
   
 ];

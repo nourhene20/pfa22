@@ -1,22 +1,22 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-admin-login',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './admin-login.component.html',
-  styleUrls: ['./admin-login.component.scss']
+  standalone:true,
+  styleUrls: ['./admin-login.component.scss'],
+  imports:[ ReactiveFormsModule,RouterModule,CommonModule]
 })
 export class AdminLoginComponent {
   loginForm: FormGroup;
   errorMessage = '';
   successMessage = '';
 
-  constructor(private fb: FormBuilder, private router: Router) {
-    // Initialisation du formulaire avec validation
+  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
@@ -26,17 +26,17 @@ export class AdminLoginComponent {
   onSubmit() {
     const { email, password } = this.loginForm.value;
 
-    // ✅ Vérification statique (à remplacer par une requête API plus tard)
-    if (email === 'admin@example.com' && password === 'admin123') {
-      this.successMessage = 'Connexion réussie ! Redirection...';
-      this.errorMessage = '';
-
-      setTimeout(() => {
-        this.router.navigate(['/admin']);
-      }, 1000);
-    } else {
-      this.errorMessage = 'Identifiants incorrects';
-      this.successMessage = '';
-    }
+    this.http.post<any>('http://localhost:5001/api/login', { email, password }).subscribe({
+      next: res => {
+        this.successMessage = res.message;
+        this.errorMessage = '';
+        localStorage.setItem('token', res.token); // enregistrer le token
+        setTimeout(() => this.router.navigate(['/admin']), 1000);
+      },
+      error: err => {
+        this.errorMessage = err.error.message || 'Erreur de connexion';
+        this.successMessage = '';
+      }
+    });
   }
 }

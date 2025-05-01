@@ -33,4 +33,9 @@ export class AdminDashboardComponent implements OnInit {
   navigateTo(path: string) {
     this.router.navigate([`/${path}`]);
   }
-}
+  logout(): void {
+      localStorage.removeItem('token');        // au cas où tu stockes dans sessionStorage
+      this.router.navigate(['/login']);
+    }
+  }
+  
