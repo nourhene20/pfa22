@@ -12,9 +12,9 @@ import { HomeComponent } from './home/home.component';
 import { ReglageValiditeComponent } from './reglage-validite/reglage-validite.component';
 import { ResumeComponent } from './resume/resume.component';
 import { LienInvalideComponent } from './lien-invalide.component';
+import { ResultsComponent } from './results/results.component';
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'gestion_entretien', component: GestionEntretienComponent },
   { path: 'ajout_entretien', component: AjoutEntretienComponent },
   { path: 'candidate', component: CandidateComponent },
   { path: 'admin', component: AdminDashboardComponent },
@@ -29,5 +29,7 @@ export const routes: Routes = [
   { path: 'reglage-validite', component: ReglageValiditeComponent },
   { path: 'resume', component: ResumeComponent },
   { path: 'invalide', component: LienInvalideComponent },
+  {path:'results', component:ResultsComponent},
+  { path: 'gestion-entretien', component: GestionEntretienComponent },
   
 ];

@@ -1,0 +1,48 @@
+Question: bonjour cv ?
+Réponse: bonjour ça va
+
+Question: Qu’est-ce qu’un fichier ?
+Réponse: un fichier et une structure histoire de paragraphe
+
+Question: Qu’est-ce qu’un mot de passe sécurisé ?
+Réponse: mot de passe sécurisé est constitué au mois de huit caractères mélangé entre tes lettres majuscules des lettres et molécules et des chiffres
+
+Question: Qu’est-ce qu’un mot de passe sécurisé ?
+Réponse: mot de passe
+
+Question: Qu’est-ce qu’un mot de passe sécurisé ?
+Réponse: mot de passe sécurisé composé au moins de 8 caractères
+
+Question: Qu’est-ce qu’un fichier ?
+Réponse: afficher d'une structure de stockage des données
+
+Question: Que signifie « HTML » ?
+Réponse:  acheter un mail et le squelette d'une page web
+
+Question: Donnez un exemple de navigateur web?
+Réponse:  dans le logiciel
+
+Question: Que permet de faire un moteur de recherche ?
+Réponse:  de recherche des informations qui élit ou mots clés entrée sur la barre de recherche
+
+Question: Qu’est-ce qu’un mot de passe sécurisé ?
+Réponse:  mot de passe sécurisé constitué de au moins 8 caractères mélangés entre des lettres minuscules et des chiffres
+
+Question: Qu’est-ce qu’un fichier ?
+Réponse: bonjour
+
+Question: Que signifie « HTML » ?
+Réponse:  alors acheter un mail et la squelette d'une page web
+
+Question: Quelle est la fonction d’un système d’exploitation ?
+Réponse:  le cerveau
+
+Question: Donnez un exemple de navigateur web?
+Réponse:  Google
+
+Question: Que permet de faire un moteur de recherche ?
+Réponse:  chercher des informations qui a une relation avec les mots clés entrée par la barre de recherche
+
+Question: Qu’est-ce qu’un mot de passe sécurisé ?
+Réponse:  un mot de passe sécurité et constitué au moins de 8 caractères mélangés entre des chiffres des lettres majuscules des lettres minuscules et des caractères par exemple les points les virgules les points d'exclamation et les points d'interrogation
+

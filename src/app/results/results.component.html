@@ -1,0 +1,23 @@
+<div class="container">
+    <h1>Résultats des entretiens</h1>
+  
+    <div *ngFor="let r of results" class="card">
+      <h2>{{ r.nom }} {{ r.prenom }}</h2>
+      <p><strong>Domaine :</strong> {{ r.domaine }}</p>
+      <p><strong>Email :</strong> {{ r.email }}</p>
+      <p><strong>Téléphone :</strong> {{ r.telephone }}</p>
+      <p><strong>Date début :</strong> {{ r.dateDebut | date:'short' }}</p>
+      <p><strong>Date fin :</strong> {{ r.dateFin | date:'short' }}</p>
+  
+      <p *ngIf="r.filepath">
+        <strong>Fichier texte :</strong>
+        <a [href]="'http://localhost:3000/' + r.filepath" target="_blank">📄 Télécharger</a>
+      </p>
+  
+      <p *ngIf="r.videopath">
+        <strong>Vidéo :</strong><br>
+        <video width="320" controls [src]="'http://localhost:3000/' + r.videopath"></video>
+      </p>
+    </div>
+  </div>
+  

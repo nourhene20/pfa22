@@ -1,0 +1,15 @@
+Question: Qu’est-ce qu’un fichier ?
+Réponse: bonjour bonjour mon petit amour
+
+Question: Que signifie « HTML » ?
+Réponse:  danser
+
+Question: Quelle est la fonction d’un système d’exploitation ?
+Réponse:  bonjour
+
+Question: Donnez un exemple de navigateur web?
+Réponse:  Facebook
+
+Question: Qu’est-ce qu’un mot de passe sécurisé ?
+Réponse:  un mot de passe est un mot de passe
+

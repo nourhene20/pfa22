@@ -60,7 +60,7 @@ export class InterviewComponent implements OnInit, AfterViewInit {
   }
 
   loadQuestions(domaine: string): void {
-    fetch(`http://localhost:5000/entretien/domaines/${encodeURIComponent(domaine)}`)
+    fetch(`http://localhost:3000/api/entretien/domaines/${encodeURIComponent(domaine)}`)
       .then(response => response.json())
       .then(data => {
         this.questions = data.questions
@@ -73,6 +73,7 @@ export class InterviewComponent implements OnInit, AfterViewInit {
   }
 
   async startInterview(): Promise<void> {
+    localStorage.removeItem('responses');
     try {
       if (this.startInterviewButton) {
         this.startInterviewButton.disabled = true;
@@ -262,8 +263,9 @@ export class InterviewComponent implements OnInit, AfterViewInit {
   }
 
   generateResponseFile(): void {
-    const responses = localStorage.getItem('responses') || '';
-    if (!responses.trim()) {
+    const storedResponses = localStorage.getItem('responses') || '';
+    
+    if (!storedResponses.trim()) {
       alert('Aucune réponse à sauvegarder.');
       return;
     }
@@ -271,23 +273,25 @@ export class InterviewComponent implements OnInit, AfterViewInit {
     const now = new Date();
     const timestamp = now.toISOString().replace(/[:.]/g, '-');
   
-    const txtFileName = `reponses_${timestamp}_this.candidateId.txt`;
-    const videoFileName = `entretien_${timestamp}_this.candidateId.mp4`;
+    const txtFileName = `reponses_${timestamp}.txt`;
+    const videoFileName = `entretien_${timestamp}.mp4`;
   
-    const responseBlob = new Blob([responses], { type: 'text/plain;charset=utf-8' });
+    const responseBlob = new Blob([storedResponses], { type: 'text/plain;charset=utf-8' });
+    const videoBlob = new Blob(this.recordedChunks, { type: 'video/mp4' });
   
     const formData = new FormData();
     formData.append('candidateId', this.candidateId);
-    formData.append('video', new File([new Blob(this.recordedChunks)], videoFileName, { type: 'video/webm' }));
+    formData.append('video', new File([videoBlob], videoFileName, { type: 'video/mp4' }));
     formData.append('text', new File([responseBlob], txtFileName, { type: 'text/plain' }));
   
-    fetch('http://localhost:5000/api/files/upload', {
+    fetch('http://localhost:3000/api/files/upload', {
       method: 'POST',
       body: formData
     })
       .then(res => res.json())
       .then(data => {
         console.log('✅ Fichiers enregistrés dans MongoDB :', data);
+        localStorage.removeItem('responses'); // 🔄 Nettoyer après sauvegarde
       })
       .catch(err => {
         console.error('❌ Erreur enregistrement MongoDB :', err);

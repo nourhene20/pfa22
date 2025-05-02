@@ -1,0 +1,12 @@
+Question: bonjour comment allez vous?
+Réponse: bonjour
+
+Question: c' est quoi ton nom?
+Réponse:  Sarah
+
+Question: d'ou vous venez?
+Réponse:  la Tunisie
+
+Question: combien de soeurs et freres vous avez?
+Réponse:  2
+

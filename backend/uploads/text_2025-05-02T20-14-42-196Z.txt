@@ -1,0 +1,18 @@
+Question: Qu’est-ce qu’un fichier ?
+Réponse: alors un fichier d'une structure de stockage des données sous forme textuelle
+
+Question: Que signifie « HTML » ?
+Réponse:  alors HTML c'est la squelette d'un site web elle comporte les parties du texte la description textuelle d'un site web
+
+Question: Quelle est la fonction d’un système d’exploitation ?
+Réponse:  la fonction d'un système d'exploitation généralement et de gérer du d'effectuer des tâches de ton lancement entre l'étage du processus c'est tout simplement le cerveau dans un logiciel ou d'un système
+
+Question: Donnez un exemple de navigateur web?
+Réponse:  tu as un système
+
+Question: Que permet de faire un moteur de recherche ?
+Réponse:  alors le moteur de recherche permet de chercher des informations concernant un sujet ou un mot clé entré par la barre de recherche dans des sites Web ou des pages web sur Internet
+
+Question: Qu’est-ce qu’un mot de passe sécurisé ?
+Réponse:  le mot de passe sécurisé est un mot de passe constitué au mois de huit caractère qui est constitué généralement des lettres magiques des chiffres des points convaincu il est un mélange de caractère pour ne pas être accessible par tout le monde
+

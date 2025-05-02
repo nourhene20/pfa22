@@ -6,7 +6,7 @@ import { Entretien } from './entretien.entree';
 
 @Injectable({ providedIn: 'root' })
 export class EntretienService {
-  private apiUrl = 'http://localhost:5000/entretien';
+  private apiUrl = 'http://localhost:3000/api/entretien';
   private entretienSubject = new BehaviorSubject<Entretien[]>([]);
   public entretiens$ = this.entretienSubject.asObservable();
 
