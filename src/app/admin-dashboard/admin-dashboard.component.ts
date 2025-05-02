@@ -21,7 +21,7 @@ export class AdminDashboardComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
-    this.http.get<string[]>('http://localhost:5000/entretien/domaines')
+    this.http.get<string[]>('http://localhost:3000/api/entretien/domaines')
       .subscribe({
         next: (data) => this.domaines = data,
         error: (err) => console.error('Erreur chargement domaines entretien', err)

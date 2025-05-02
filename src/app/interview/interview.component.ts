@@ -60,7 +60,7 @@ export class InterviewComponent implements OnInit, AfterViewInit {
   }
 
   loadQuestions(domaine: string): void {
-    fetch(`http://localhost:5000/entretien/domaines/${encodeURIComponent(domaine)}`)
+    fetch(`http://localhost:3000/api/entretien/domaines/${encodeURIComponent(domaine)}`)
       .then(response => response.json())
       .then(data => {
         this.questions = data.questions
@@ -73,6 +73,7 @@ export class InterviewComponent implements OnInit, AfterViewInit {
   }
 
   async startInterview(): Promise<void> {
+    localStorage.removeItem('responses');
     try {
       if (this.startInterviewButton) {
         this.startInterviewButton.disabled = true;
@@ -221,9 +222,8 @@ export class InterviewComponent implements OnInit, AfterViewInit {
     if (this.mediaRecorder) {
       this.mediaRecorder.onstop = () => {
         if (this.recordedChunks.length > 0) {
-          const videoBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
+          const videoBlob = new Blob(this.recordedChunks, { type: 'video/mp4' });
           this.generateVideoFile(videoBlob);
-          this.sendVideoToServer(videoBlob);
           this.cleanupResources();
         } else {
           this.displayMessage('Erreur : aucun enregistrement vidéo.', 'system');
@@ -262,68 +262,42 @@ export class InterviewComponent implements OnInit, AfterViewInit {
     }
   }
 
-  sendVideoToServer(videoBlob: Blob): void {
-    const formData = new FormData();
-    formData.append('video', videoBlob, 'interview.webm');
-
-    fetch('/upload-video', {
-      method: 'POST',
-      body: formData
-    })
-      .then(response => response.json())
-      .then(data => console.log('Vidéo envoyée :', data))
-      .catch(err => console.error('Erreur d\'envoi vidéo :', err));
-  }
-
   generateResponseFile(): void {
-    const responses = localStorage.getItem('responses') || '';
-    if (!responses.trim()) {
+    const storedResponses = localStorage.getItem('responses') || '';
+    
+    if (!storedResponses.trim()) {
       alert('Aucune réponse à sauvegarder.');
       return;
     }
   
-    // Générer un timestamp propre
     const now = new Date();
     const timestamp = now.toISOString().replace(/[:.]/g, '-');
   
-    // Définir les noms de fichiers
-    const txtFileName = `reponses_entretien_${timestamp}.txt`;
+    const txtFileName = `reponses_${timestamp}.txt`;
     const videoFileName = `entretien_${timestamp}.mp4`;
   
-    // Définir les chemins relatifs
-    const txtPath = `uploads/${txtFileName}`;
-    const videoPath = `uploads/${videoFileName}`;
+    const responseBlob = new Blob([storedResponses], { type: 'text/plain;charset=utf-8' });
+    const videoBlob = new Blob(this.recordedChunks, { type: 'video/mp4' });
   
-    // Créer le fichier texte en local pour téléchargement
-    const blob = new Blob([responses], { type: 'text/plain;charset=utf-8' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = txtFileName;
-    link.click();
+    const formData = new FormData();
+    formData.append('candidateId', this.candidateId);
+    formData.append('video', new File([videoBlob], videoFileName, { type: 'video/mp4' }));
+    formData.append('text', new File([responseBlob], txtFileName, { type: 'text/plain' }));
   
-    // Envoyer les informations vers le backend
-    fetch('http://localhost:5000/api/files/save', {
+    fetch('http://localhost:3000/api/files/upload', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        candidateId: this.candidateId,
-        videopath: videoPath,
-        filepath: txtPath
-      })
+      body: formData
     })
       .then(res => res.json())
       .then(data => {
         console.log('✅ Fichiers enregistrés dans MongoDB :', data);
+        localStorage.removeItem('responses'); // 🔄 Nettoyer après sauvegarde
       })
       .catch(err => {
         console.error('❌ Erreur enregistrement MongoDB :', err);
       });
-}
+  }
   
-  
-
   generateVideoFile(videoBlob: Blob): void {
     if (!videoBlob || videoBlob.size === 0) {
       this.displayMessage('Erreur : impossible de générer le fichier vidéo.', 'system');

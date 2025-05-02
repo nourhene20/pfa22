@@ -1,0 +1,18 @@
+Question: Qu’est-ce qu’un fichier ?
+Réponse: un fichier est une structure de
+
+Question: Que signifie « HTML » ?
+Réponse:  salon
+
+Question: Quelle est la fonction d’un système d’exploitation ?
+Réponse:  c'est le cerveau le système
+
+Question: Donnez un exemple de navigateur web?
+Réponse:  Google ou Firefox
+
+Question: Que permet de faire un moteur de recherche ?
+Réponse:  chercher des informations dans des pages web sur Internet à partir des mots clés entrés par la barre de recherche
+
+Question: Qu’est-ce qu’un mot de passe sécurisé ?
+Réponse:  en mot de passe sécurisé ton mot de passe constitué au mois de mélanger entre des lettres comme les points les virgules les points d'exclamation les points d'interrogation et d'autres
+
