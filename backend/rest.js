@@ -1,23 +1,36 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const EntretienModel = require('./entry-schema'); // Assurez-vous que ce fichier existe
+const fs = require('fs');
 const path = require('path');
+const EntretienModel = require('./entry-schema'); // ✅ Schéma mongoose des entretiens
+
 const app = express();
 const port = process.env.PORT || 5000;
+
+// ✅ Créer le dossier uploads s'il n'existe pas
+const uploadsDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir);
+}
 
 // ✅ Middleware
 app.use(cors());
 app.use(express.json());
-app.use('/api', require('./routes/upload'));
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Permet de servir les fichiers statiques (vidéos et fichiers texte)
 
-// ✅ Connexion à MongoDB
-mongoose.connect("mongodb://localhost:27017/entretiens")
+// ✅ Connexion MongoDB
+mongoose.connect("mongodb://localhost:27017/entretiens", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
   .then(() => console.log('✅ Connecté à MongoDB'))
   .catch(err => console.error('❌ Erreur MongoDB :', err));
 
-// ✅ Routes
+// ✅ Routes Upload
+app.use('/api', require('./routes/upload')); // POST /api/files/upload
+
+// ✅ ROUTES ENTRETIEN CRUD
 
 // Obtenir tous les entretiens
 app.get('/entretien', async (req, res) => {
@@ -29,7 +42,7 @@ app.get('/entretien', async (req, res) => {
   }
 });
 
-// Obtenir les entretiens par domaine
+// Obtenir les questions par domaine
 app.get('/entretien/domaines/:domaine', async (req, res) => {
   const { domaine } = req.params;
   try {
@@ -43,6 +56,8 @@ app.get('/entretien/domaines/:domaine', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+// Obtenir la liste des domaines
 app.get('/entretien/domaines', async (req, res) => {
   try {
     const domaines = await EntretienModel.distinct('domaine');
@@ -52,6 +67,7 @@ app.get('/entretien/domaines', async (req, res) => {
     res.status(500).json({ error: 'Erreur lors de la récupération des domaines' });
   }
 });
+
 // Ajouter un entretien
 app.post('/entretien', async (req, res) => {
   try {
@@ -81,7 +97,7 @@ app.put('/entretien/:id', async (req, res) => {
 app.delete('/entretien/:id', async (req, res) => {
   try {
     await EntretienModel.findByIdAndDelete(req.params.id);
-    res.status(204).end();
+    res.status(204).end(); // No content
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -89,5 +105,5 @@ app.delete('/entretien/:id', async (req, res) => {
 
 // ✅ Démarrer le serveur
 app.listen(port, () => {
-  console.log(`🚀 Serveur démarré sur le port ${port}`);
+  console.log(`🚀 Serveur démarré sur http://localhost:${port}`);
 });

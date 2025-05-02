@@ -1,20 +1,57 @@
-// routes/upload.js
 const express = require('express');
 const router = express.Router();
 const File = require('../models/file');
+const multer = require('multer');
+const path = require('path');
 
+// Configuration de multer
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, path.join(__dirname, '../uploads')); // Chemin vers backend/uploads
+  },
+  filename: (req, file, cb) => {
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+    const ext = path.extname(file.originalname);
+    cb(null, `${file.fieldname}_${timestamp}${ext}`);
+  }
+});
 
-router.post('/files/save', async (req, res) => {
-  const { candidateId, videopath, filepath } = req.body;
+const upload = multer({
+  storage,
+  limits: { fileSize: 100 * 1024 * 1024 }, // Limite à 100MB
+  fileFilter: (req, file, cb) => {
+    const allowedTypes = ['video/webm', 'video/mp4', 'text/plain'];
+    if (allowedTypes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error('Type de fichier non autorisé'), false);
+    }
+  }
+});
 
-  if (!candidateId || !videopath || !filepath) {
-    return res.status(400).json({ error: '❌ Données manquantes.' });
+// Route pour uploader les fichiers
+router.post('/files/upload', upload.fields([
+  { name: 'video', maxCount: 1 },
+  { name: 'text', maxCount: 1 }
+]), async (req, res) => {
+  const { candidateId } = req.body;
+
+  if (!candidateId || !req.files || !req.files.video || !req.files.text) {
+    return res.status(400).json({ error: '❌ Données ou fichiers manquants.' });
   }
 
   try {
-    const file = new File({ candidateId, videopath, filepath });
+    const videoFile = req.files.video[0];
+    const textFile = req.files.text[0];
+
+    const file = new File({
+      candidateId,
+      videopath: `uploads/${videoFile.filename}`, // Chemin relatif
+      filepath: `uploads/${textFile.filename}`    // Chemin relatif
+    });
+
     await file.save();
-    res.status(201).json({ message: '✅ Données sauvegardées.', file });
+    res.status(201).json({ message: '✅ Fichiers sauvegardés.', file });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: '❌ Erreur serveur.' });

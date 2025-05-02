@@ -1,0 +1,15 @@
+Question: bonjour cv ?
+Réponse: bonjour ça va
+
+Question: Qu’est-ce qu’un fichier ?
+Réponse: un fichier et une structure histoire de paragraphe
+
+Question: Qu’est-ce qu’un mot de passe sécurisé ?
+Réponse: mot de passe sécurisé est constitué au mois de huit caractères mélangé entre tes lettres majuscules des lettres et molécules et des chiffres
+
+Question: Qu’est-ce qu’un mot de passe sécurisé ?
+Réponse: mot de passe
+
+Question: Qu’est-ce qu’un mot de passe sécurisé ?
+Réponse: mot de passe sécurisé composé au moins de 8 caractères
+
