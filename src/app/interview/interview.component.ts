@@ -29,7 +29,7 @@ export class InterviewComponent implements OnInit, AfterViewInit {
   @ViewChild('messagesContainer') messagesDivRef!: ElementRef<HTMLElement>;
   messagesDiv: HTMLElement | null = null;
   startInterviewButton: HTMLButtonElement | null = null;
-
+  candidateId: string = '';
   domaine: string = '';
 
   constructor(private route: ActivatedRoute, private renderer: Renderer2) {}
@@ -39,7 +39,9 @@ export class InterviewComponent implements OnInit, AfterViewInit {
       this.synth = window.speechSynthesis;
       this.startInterviewButton = document.getElementById('startInterview') as HTMLButtonElement | null;
     }
-
+    this.route.queryParamMap.subscribe(queryParams => {
+      this.candidateId = queryParams.get('candidatId') || '';
+    });
     this.route.paramMap.subscribe(params => {
       this.domaine = params.get('domaine') || '';
       if (this.domaine) {
@@ -279,13 +281,48 @@ export class InterviewComponent implements OnInit, AfterViewInit {
       alert('Aucune réponse à sauvegarder.');
       return;
     }
-
+  
+    // Générer un timestamp propre
+    const now = new Date();
+    const timestamp = now.toISOString().replace(/[:.]/g, '-');
+  
+    // Définir les noms de fichiers
+    const txtFileName = `reponses_entretien_${timestamp}.txt`;
+    const videoFileName = `entretien_${timestamp}.mp4`;
+  
+    // Définir les chemins relatifs
+    const txtPath = `uploads/${txtFileName}`;
+    const videoPath = `uploads/${videoFileName}`;
+  
+    // Créer le fichier texte en local pour téléchargement
     const blob = new Blob([responses], { type: 'text/plain;charset=utf-8' });
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
-    link.download = `reponses_entretien_${new Date().toISOString()}.txt`;
+    link.download = txtFileName;
     link.click();
-  }
+  
+    // Envoyer les informations vers le backend
+    fetch('http://localhost:5000/api/files/save', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        candidateId: this.candidateId,
+        videopath: videoPath,
+        filepath: txtPath
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log('✅ Fichiers enregistrés dans MongoDB :', data);
+      })
+      .catch(err => {
+        console.error('❌ Erreur enregistrement MongoDB :', err);
+      });
+}
+  
+  
 
   generateVideoFile(videoBlob: Blob): void {
     if (!videoBlob || videoBlob.size === 0) {
@@ -296,7 +333,7 @@ export class InterviewComponent implements OnInit, AfterViewInit {
     const url = URL.createObjectURL(videoBlob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `entretien_${new Date().toISOString()}.mp4`;
+    link.download = `entretien_${new Date().toISOString().replace(/[:.]/g, '-')}.mp4`;
     link.click();
     URL.revokeObjectURL(url);
   }

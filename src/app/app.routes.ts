@@ -12,7 +12,6 @@ import { HomeComponent } from './home/home.component';
 import { ReglageValiditeComponent } from './reglage-validite/reglage-validite.component';
 import { ResumeComponent } from './resume/resume.component';
 import { LienInvalideComponent } from './lien-invalide.component';
-
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'gestion_entretien', component: GestionEntretienComponent },

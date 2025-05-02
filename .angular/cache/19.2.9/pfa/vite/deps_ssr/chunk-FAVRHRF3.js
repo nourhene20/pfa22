@@ -1,13 +1,13 @@
 import { createRequire } from 'module';const require = createRequire(import.meta.url);
 import {
-  withHttpTransferCache
-} from "./chunk-T2B7KMNB.js";
-import {
   CommonModule,
   DomAdapter,
   getDOM,
   setRootDomAdapter
 } from "./chunk-BXKCYA5S.js";
+import {
+  withHttpTransferCache
+} from "./chunk-T2B7KMNB.js";
 import {
   DOCUMENT,
   PLATFORM_BROWSER_ID,
@@ -2028,4 +2028,4 @@ export {
    * License: MIT
    *)
 */
-//# sourceMappingURL=chunk-MDL2I56P.js.map
+//# sourceMappingURL=chunk-FAVRHRF3.js.map

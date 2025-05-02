@@ -12,7 +12,7 @@ mongoose.connect('mongodb://localhost:27017/admin-auth', {
   const hashedPassword = await bcrypt.hash('admin123', 10);
 
   const admin = new Admin({
-    email: 'admin@example.com',
+    email: 'zouhour@admin.com',
     password: hashedPassword
   });
 

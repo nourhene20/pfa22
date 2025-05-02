@@ -10,7 +10,7 @@ import { Router, RouterModule } from '@angular/router'; // 🔥 Import RouterMod
 @Component({
   selector: 'app-candidate',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, HttpClientModule, RouterModule, NavBarComponent],
+  imports: [CommonModule, ReactiveFormsModule, HttpClientModule, RouterModule],
   templateUrl: './candidate.component.html',
   styleUrls: ['./candidate.component.scss']
 })
