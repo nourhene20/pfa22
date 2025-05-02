@@ -1,11 +1,134 @@
-/* gestion-entretien.component.scss */
+.container {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h2 {
+  text-align: center;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+}
+
+input[type="text"],
+textarea {
+  padding: 10px 14px;
+  border: 1px solid #cbd5e0;
+  border-radius: 6px;
+  font-size: 15px;
+  background-color: #fff;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+  outline: none;
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed; /* Important : force les colonnes à se dimensionner uniformément */
+}
+
+tr {
+  height: 100px; /* Taille fixe pour toutes les lignes */
+}
+
+td, th {
+  padding: 10px;
+  text-align: center;
+  vertical-align: middle;
+  border-bottom: 1px solid #d3d3d3; /* ligne de séparation gris clair */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+th{
+    text-align: center;
+    color: white;
+    background-color: #224955;
+}
+td {
+  position: relative;
+  max-height: 100px; /* même hauteur que <tr> */
+}
+
+td span,
+td textarea {
+  display: block;
+  max-height: 80px; /* un peu moins que tr pour laisser de la marge */
+  overflow-y: auto;
+  white-space: pre-wrap;
+  text-align: left;
+  padding-right: 5px;
+}
+
+/* Scroll visible dans les cellules */
+td span::-webkit-scrollbar,
+td textarea::-webkit-scrollbar {
+  width: 6px;
+}
+td span::-webkit-scrollbar-thumb,
+td textarea::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 3px;
+}
+
+
+tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+button {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  color: white;
+
+  &.edit-btn {
+    background-color:white;
+  }
+
+  &.delete-btn {
+    background-color: #6c757d;
+  }
+
+  &.save-btn {
+    background-color: #28a745;
+  }
+
+  &.cancel-btn {
+    background-color: #6c757d;
+  }
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+}
+
 .pre-wrap-text {
   white-space: pre-wrap;
   max-width: 600px;
-}
-
-.bi-trash {
-  margin-right: 0.5rem;
 }
 
 .text-muted {

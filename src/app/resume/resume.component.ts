@@ -3,11 +3,13 @@ import { SharedDataService } from '../shared-data.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { NavbarComponent } from '../navbar/navbar.component';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-resume',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,NavbarComponent,FooterComponent],
   templateUrl: './resume.component.html',
   styleUrls: ['./resume.component.scss']
 })

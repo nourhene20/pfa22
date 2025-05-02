@@ -1,6 +1,9 @@
-<div class="container mt-4">
-    <h2 class="mb-3">Réglage de la Période de Validité des Liens</h2>
-  
+<app-navbar></app-navbar>
+
+<div class="main-content">
+  <div class="form-container">
+    <h2 class="mb-3"> Période de Validité des Liens</h2>
+
     <form (ngSubmit)="onSaveValidity()">
       <div class="mb-3">
         <label for="startDate" class="form-label">Date de début :</label>
@@ -10,12 +13,12 @@
           name="startDate" 
           [min]="today" 
           required 
-          class="form-control"
+          class="form-control input-small"
           (change)="updateEndDateMin()"
           [(ngModel)]="startDate"
         >
       </div>
-  
+
       <div class="mb-3">
         <label for="endDate" class="form-label">Date de fin :</label>
         <input 
@@ -24,18 +27,23 @@
           name="endDate" 
           [min]="minEndDate" 
           required 
-          class="form-control"
+          class="form-control input-small"
           [(ngModel)]="endDate"
         >
       </div>
-  
+
       <div *ngIf="errorMessage" class="alert alert-danger mt-2">
         {{ errorMessage }}
       </div>
-  
-      <button type="submit" class="btn btn-success mt-3">
-        Enregistrer la période de validité
-      </button>
+
+      <div class="btn-wrapper mt-3">
+        <button type="submit" class="btn btn-success">
+          Enregistrer la période de validité
+        </button>
+      </div>
+      
     </form>
   </div>
-  
+</div>
+
+<app-footer></app-footer>

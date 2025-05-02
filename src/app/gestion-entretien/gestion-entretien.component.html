@@ -1,59 +1,52 @@
-<app-nav-bar></app-nav-bar>
+<app-navbar></app-navbar>
 <app-ajout-entretien></app-ajout-entretien>
-<div class="container mt-4">
-  <h2 class="mb-4">Gestion des entretiens</h2>
+
+<div class="container">
+  <h2>Gestion des entretiens</h2>
 
   <div class="table-responsive">
-    <table class="table table-bordered table-hover">
-      <thead class="table-light">
+    <table>
+      <thead>
         <tr>
-          <th scope="col">Domaine</th>
-          <th scope="col">Questions</th>
-          <th scope="col" class="text-end">Actions</th>
+          <th>Domaine</th>
+          <th>Questions</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngIf="entretiens.length === 0">
-          <td colspan="3" class="text-center text-muted py-4">
-            Chargement des entretiens...
-          </td>
+          <td colspan="3" class="text-muted">Chargement des entretiens...</td>
         </tr>
 
         <tr *ngFor="let entretien of entretiens; trackBy: trackById">
-          <td class="align-middle">
+          <td>
             <span *ngIf="editingId !== entretien.id">{{ entretien.domaine }}</span>
-            <input *ngIf="editingId === entretien.id" 
-                   type="text" 
-                   class="form-control"
+            <input *ngIf="editingId === entretien.id"
+                   type="text"
                    [(ngModel)]="editedEntretien.domaine">
           </td>
-          <td class="align-middle">
+          <td>
             <span *ngIf="editingId !== entretien.id" class="pre-wrap-text">{{ entretien.questions }}</span>
             <textarea *ngIf="editingId === entretien.id"
-                      class="form-control"
                       rows="3"
                       [(ngModel)]="editedEntretien.questions"></textarea>
           </td>
-          <td class="text-end">
-            <div class="d-flex gap-2 justify-content-end">
-              <div *ngIf="editingId !== entretien.id; else editMode">
-                <button (click)="onEdit(entretien)" 
-                        class="btn btn-primary btn-sm">
-                  <i class="bi bi-pencil"></i> Modifier
+          <td>
+            <div class="button-group">
+              <ng-container *ngIf="editingId !== entretien.id; else editMode">
+                <button (click)="onEdit(entretien)" class="edit-btn">
+                  <i class="bi bi-pencil"></i> ✏️
                 </button>
-                <button (click)="onDelete(entretien.id)" 
-                        class="btn btn-danger btn-sm">
-                  <i class="bi bi-trash"></i> Supprimer
+                <button (click)="onDelete(entretien.id)" class="delete-btn">
+                  <i class="bi bi-trash"></i> 🗑️
                 </button>
-              </div>
-              
+              </ng-container>
+
               <ng-template #editMode>
-                <button (click)="onSave()" 
-                        class="btn btn-success btn-sm">
+                <button (click)="onSave()" class="save-btn">
                   <i class="bi bi-check"></i> Sauvegarder
                 </button>
-                <button (click)="onCancel()" 
-                        class="btn btn-secondary btn-sm">
+                <button (click)="onCancel()" class="cancel-btn">
                   <i class="bi bi-x"></i> Annuler
                 </button>
               </ng-template>
@@ -64,3 +57,5 @@
     </table>
   </div>
 </div>
+
+<app-footer></app-footer>

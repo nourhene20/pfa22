@@ -4,11 +4,13 @@ import { SharedDataService } from '../shared-data.service';
 import { Router } from '@angular/router'; // ➡️ Ajoute Router !
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; 
+import { NavbarComponent } from '../navbar/navbar.component';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-reglage-validite',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,NavbarComponent,FooterComponent],
   templateUrl: './reglage-validite.component.html',
   styleUrls: ['./reglage-validite.component.scss']
 })

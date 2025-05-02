@@ -1,16 +1,4 @@
-<nav class="navbar">
-  <!-- Icône Accueil à gauche -->
-  <div class="navbar-left">
-    <a routerLink="/admin" class="navbar-logo">🏠 Accueil</a>
-  </div>
-
-  <!-- Liens à droite -->
-  <div class="navbar-right">
-    <button class="nav-button" (click)="navigateTo('candidate')">👤 Candidats</button>
-    <button class="nav-button" (click)="navigateTo('gestion_entretien')">🗓️ Entretiens</button>
-  </div>
-</nav>
-
+<app-navbar></app-navbar>
 <div class="container">
   <h1>Gestion des Candidats</h1>
 
@@ -47,7 +35,6 @@
     </div>
     <div>
       <button type="submit">{{ isEditMode ? '✏️ Modifier' : '➕ Ajouter' }}</button>
-      <button type="button" (click)="resetForm()">🧹 Réinitialiser</button>
       <button type="button" (click)="cancelEdit()" *ngIf="isEditMode">❌ Annuler</button>
       <button (click)="showCandidates = !showCandidates">
         {{ showCandidates ? '🙈 Masquer la liste' : '👁️ Afficher la liste des candidats' }}
@@ -88,3 +75,4 @@
   </table>
 </div>
 </div>
+<app-footer></app-footer>

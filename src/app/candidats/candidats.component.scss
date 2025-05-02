@@ -1,13 +1,37 @@
-.container {
+/*.container {
   background-color: #f5f5f5;
-  min-height: calc(100vh - 100px); /* pour laisser place au navbar/footer */
+  min-height: calc(100vh - 100px); 
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   padding: 30px;
+  
+}*/
+.container {
+  background-color: #f5f5f5; // Conservé
+  min-height: calc(100vh - 100px); // Conservé pour navbar/footer
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; // Conservé
+  align-items: center; // Centre horizontalement les éléments enfants (comme table)
+  padding: 30px;
+  width: 100%; // Pleine largeur pour centrage
+  max-width: 1200px; // Limite la largeur pour un design équilibré
+  margin: 0 auto; // Centre le conteneur horizontalement dans la page
+  box-sizing: border-box; // Inclut padding dans la largeur
 }
 
+table {
+  width: 100%; // Conservé, occupe toute la largeur du conteneur
+  max-width: 100%; // Empêche le tableau de dépasser le conteneur
+  border-collapse: collapse;
+  background-color: white; // Conservé
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); // Conservé
+  border-radius: 8px; // Ajouté pour un look moderne
+  overflow: hidden; // Assure que le contenu reste dans les coins arrondis
+  margin: 20px 0; // Espacement vertical pour une meilleure intégration
+}
 h2 {
   color: #224955;
   margin-bottom: 20px;
@@ -17,13 +41,22 @@ form {
   width: 100%;
   max-width: 900px;
 }
-
-table {
+.btn.btn-primary {
+  background-color: #224955; // Couleur demandée pour le bouton "Suivant"
+  color: white; // Texte blanc pour contraste
+  padding: 10px 20px; // Cohérent avec les styles précédents
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+/*table {
   width: 100%;
   border-collapse: collapse;
   background-color: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
+}*/
 
 table th, table td {
   text-align: center;
@@ -46,7 +79,7 @@ input[type="checkbox"] {
   height: 18px;
 }
 
-button[type="submit"] {
+/*button[type="submit"] {
   background-color: #224955;
   color: white;
   border: none;
@@ -59,7 +92,7 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
   background-color: #1a3540;
-}
+}*/
 
 h4 {
   color: #224955;
@@ -83,4 +116,14 @@ ul li a {
 
 ul li a:hover {
   text-decoration: underline;
+}
+.btn.btn-success {
+  background-color: #3c995f; // Remplace la couleur verte par #224955
+  color: white; // Texte blanc pour contraste
+  padding: 10px 20px; // Identique au bouton "Suivant"
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }

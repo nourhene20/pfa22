@@ -1,0 +1,57 @@
+  .navbar {
+    background-color: #224955;
+    padding: 15px 30px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Section gauche : logo */
+  .navbar-left .navbar-logo {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+  }
+  
+  .navbar-left .navbar-logo:hover {
+    opacity: 0.8;
+  }
+  
+  /* Section droite : boutons */
+  .navbar-right {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .nav-button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    padding: 8px 12px;
+    border-radius: 6px;
+  }
+  
+  .nav-button:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-1px);
+  }
+  
+
+  button.reset-btn {
+    background-color: #ffc107;
+    color: #212529;
+  }
+  button.reset-btn:hover {
+    background-color: #e0a800;
+    transform: translateY(-2px);
+  }
+  
+  
+ 

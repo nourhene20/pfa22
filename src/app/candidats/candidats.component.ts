@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SharedDataService } from '../shared-data.service'; 
+import { NavbarComponent } from '../navbar/navbar.component';
+import { FooterComponent } from '../footer/footer.component';
 
 interface Candidate {
   _id: string;
@@ -17,7 +19,7 @@ interface Candidate {
 @Component({
   selector: 'app-candidats',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule,NavbarComponent,FooterComponent],
   templateUrl: './candidats.component.html',
   styleUrls: ['./candidats.component.scss']
 })

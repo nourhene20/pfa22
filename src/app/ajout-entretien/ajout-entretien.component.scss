@@ -1,10 +1,104 @@
+.form-container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  
+  h2 {
+    text-align: center;
+    color: #1a1a1a;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+
+  form {
+    width: 100%;
+  }
+
+  .form-label {
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .mb-4 {
+    width: 100%;
+  }
+
+  .drop-zone {
+    width: 100%;
+  }
+
+  .d-flex {
+    width: 100%;
+  }
+}
+
+
+input.form-control,
+textarea.form-control {
+  padding: 10px 14px;
+  border: 1px solid #cbd5e0;
+  border-radius: 6px;
+  font-size: 15px;
+  background-color: #fff;
+  transition: all 0.3s ease;
+  
+
+  &:focus {
+    border-color: #224955;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+    outline: none;
+  }
+
+  &.is-invalid {
+    border-color: #dc3545;
+  }
+}
+
+/*.primary-btn {
+  background-color: #007bff;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-weight: 600;
+  padding: 10px 16px;
+  transition: 0.3s ease;
+
+  &:hover {
+    background-color: #0069d9;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.secondary-btn {
+  background-color: #6c757d;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-weight: 600;
+  padding: 10px 16px;
+  transition: 0.3s ease;
+
+  &:hover {
+    background-color: #5a6268;
+  }
+}*/
+
 .drop-zone {
   border: 2px dashed #ced4da;
-  border-radius: 4px;
+  border-radius: 6px;
   padding: 20px;
   text-align: center;
   background: #f8f9fa;
   transition: border-color 0.2s, background 0.2s;
+  margin-bottom: 10px;
 
   &:hover,
   &.dragover {
@@ -28,15 +122,28 @@
   padding: 5px;
 }
 
-.text-danger {
+.text-danger,
+.invalid-feedback {
   font-size: 0.875em;
 }
-
-.invalid-feedback {
-  display: block;
-}
-
-/* Ensure textarea fits within drop zone */
-.form-control {
+.btn-vertical-stack {
+  display: flex;
+  flex-direction: column;
   width: 100%;
 }
+
+.btn-ajouter {
+  background-color: #224955;
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  padding: 12px;
+  width: 100%;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-ajouter:hover {
+  background-color: #1a3740;
+}
+

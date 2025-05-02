@@ -1,5 +1,13 @@
 <nav class="navbar">
-    <button (click)="navigateTo('candidate')">👤 Candidats</button>
-    <button (click)="navigateTo('gestion_entretien')">🗓️ Entretiens</button>
-  </nav>
-  
+  <!-- Icône Accueil à gauche -->
+  <div class="navbar-left">
+    <a routerLink="/admin" class="navbar-logo">🏠 Accueil</a>
+  </div>
+
+  <!-- Liens à droite -->
+  <div class="navbar-right">
+    <button class="nav-button" (click)="navigateTo('candidate')">👤 Candidats</button>
+    <button class="nav-button" (click)="navigateTo('gestion_entretien')">🗓 Entretiens</button>
+    <button class="nav-button" (click)="navigateTo('home')">🔓 Déconnexion</button>
+  </div>
+</nav>

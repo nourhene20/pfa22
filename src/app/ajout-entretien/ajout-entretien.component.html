@@ -1,98 +1,76 @@
-<div class="container mt-4">
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <h2 class="mb-4">{{ editMode ? 'Modifier un entretien' : 'Créer un nouvel entretien' }}</h2>
-      
-      <form (ngSubmit)="onSubmit()" [formGroup]="entretienForm">
-        <!-- Champ Domaine -->
-        <div class="form-group mb-3">
-          <label for="domaine" class="form-label">Domaine</label>
-          <input 
-            type="text" 
+<div class="container mt-8 px-4 form-container">
+  <div class="mx-auto max-w-2xl bg-white rounded-3xl shadow p-5">
+    <h2 class="text-2xl font-semibold mb-6 text-center">
+      {{ editMode ? 'Modifier un entretien' : 'Gestion entretiens' }}
+    </h2>
+
+    <form (ngSubmit)="onSubmit()" [formGroup]="entretienForm" novalidate >
+      <!-- Domaine -->
+      <div class="mb-4">
+        <label for="domaine" class="form-label fw-semibold">Domaine</label>
+        <input
+          type="text"
+          id="domaine"
+          formControlName="domaine"
+          class="form-control"
+          [class.is-invalid]="entretienForm.get('domaine')?.invalid && entretienForm.get('domaine')?.touched"
+        />
+        <div *ngIf="entretienForm.get('domaine')?.invalid && entretienForm.get('domaine')?.touched" class="invalid-feedback">
+          <div *ngIf="entretienForm.get('domaine')?.errors?.['required']">Le domaine est obligatoire</div>
+          <div *ngIf="entretienForm.get('domaine')?.errors?.['maxlength']">Maximum 50 caractères</div>
+          <div *ngIf="entretienForm.get('domaine')?.errors?.['duplicateDomaine']">Ce domaine existe déjà</div>
+        </div>
+      </div>
+
+      <!-- Questions avec drop zone -->
+      <div class="mb-4">
+        <label for="questions" class="form-label fw-semibold">Questions</label>
+        <div
+          class="drop-zone border border-2 rounded-2 p-4 text-center bg-light"
+          (dragover)="onDragOver($event)"
+          (dragenter)="onDragEnter($event)"
+          (drop)="onDrop($event)"
+          [class.border-danger]="entretienForm.get('questions')?.invalid && entretienForm.get('questions')?.touched"
+        >
+          <p class="text-muted mb-2">Glissez et déposez un fichier texte ici ou cliquez pour sélectionner</p>
+          <input
+            type="file"
+            accept=".txt"
+            class="form-control mb-3"
+            (change)="onFileChange($event)"
+          />
+
+          <textarea
+            id="questions"
+            formControlName="questions"
+            rows="6"
+            placeholder="Ou saisissez les questions manuellement"
             class="form-control"
-            id="domaine"
-            formControlName="domaine"
-            [class.is-invalid]="entretienForm.get('domaine')?.invalid && entretienForm.get('domaine')?.touched"
-          >
-          <div *ngIf="entretienForm.get('domaine')?.invalid && entretienForm.get('domaine')?.touched" class="invalid-feedback">
-            <div *ngIf="entretienForm.get('domaine')?.errors?.['required']">
-              Le domaine est obligatoire
-            </div>
-            <div *ngIf="entretienForm.get('domaine')?.errors?.['maxlength']">
-              Maximum 50 caractères
-            </div>
-            <div *ngIf="entretienForm.get('domaine')?.errors?.['duplicateDomaine']">
-              Ce domaine existe déjà
-            </div>
-          </div>
-        </div>
-
-        <!-- Champ Questions -->
-        <div class="form-group mb-4">
-          <label for="questions" class="form-label">Questions</label>
-          
-          <!-- Drag-and-Drop Zone -->
-          <div 
-            class="drop-zone"
-            (dragover)="onDragOver($event)"
-            (dragenter)="onDragEnter($event)"
-            (drop)="onDrop($event)"
             [class.is-invalid]="entretienForm.get('questions')?.invalid && entretienForm.get('questions')?.touched"
-          >
-            <p class="drop-message">Glissez et déposez un fichier texte ici ou cliquez pour sélectionner</p>
-            <input 
-              type="file" 
-              accept=".txt" 
-              class="file-input"
-              (change)="onFileChange($event)"
-              aria-label="Sélectionner un fichier texte"
-            >
-            
-            <!-- Textarea for manual editing -->
-            <textarea
-              class="form-control mt-2"
-              id="questions"
-              formControlName="questions"
-              rows="8"
-              placeholder="Ou saisissez les questions manuellement"
-              [class.is-invalid]="entretienForm.get('questions')?.invalid && entretienForm.get('questions')?.touched"
-            ></textarea>
-          </div>
-
-          <!-- File Error Message -->
-          <div *ngIf="fileError" class="text-danger mt-1">{{ fileError }}</div>
-
-          <!-- Validation Feedback -->
-          <div *ngIf="entretienForm.get('questions')?.invalid && entretienForm.get('questions')?.touched" class="invalid-feedback d-block">
-            <div *ngIf="entretienForm.get('questions')?.errors?.['required']">
-              Les questions sont obligatoires
-            </div>
-            <div *ngIf="entretienForm.get('questions')?.errors?.['maxlength']">
-              Maximum 500 caractères
-            </div>
-          </div>
+          ></textarea>
         </div>
 
-        <!-- Boutons -->
-        <div class="d-flex gap-2">
-          <button 
-            type="submit" 
-            class="btn btn-primary"
-            [disabled]="entretienForm.invalid || loading"
-          >
-            <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status"></span>
-            {{ editMode ? 'Modifier' : 'Créer' }}
-          </button>
-          
-          <button 
-            type="button" 
-            class="btn btn-outline-secondary"
-            (click)="onCancel()"
-          >
-            Annuler
-          </button>
+        <div *ngIf="fileError" class="text-danger mt-1 small">{{ fileError }}</div>
+
+        <div *ngIf="entretienForm.get('questions')?.invalid && entretienForm.get('questions')?.touched" class="invalid-feedback d-block">
+          <div *ngIf="entretienForm.get('questions')?.errors?.['required']">Les questions sont obligatoires</div>
+          <div *ngIf="entretienForm.get('questions')?.errors?.['maxlength']">Maximum 500 caractères</div>
         </div>
-      </form>
-    </div>
+      </div>
+
+      <!-- Boutons -->
+      <div class="btn-vertical-stack mt-4">
+        <button
+          type="submit"
+          class="btn btn-ajouter"
+          [disabled]="entretienForm.invalid || loading"
+        >
+          <span *ngIf="loading" class="spinner-border spinner-border-sm me-2" role="status"></span>
+          {{ editMode ? 'Modifier' : '➕Ajouter' }}
+        </button>
+        <button type="button" class="btn btn-outline-secondary w-100 mt-2" (click)="onCancel()">Annuler</button>
+      </div>
+      
+    </form>
   </div>
 </div>

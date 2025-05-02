@@ -1,10 +1,4 @@
-<nav style="background-color: #224955; padding: 15px; color: white; display: flex; justify-content: flex-end; align-items: center;"> 
-  
-  <button class="btn btn-primary mt-2"  (click)="navigateTo('candidate')" style="color: white; text-decoration: none; margin-right: 20px;">👤 Resultats</button>
-  <button class="btn btn-primary mt-2"  (click)="navigateTo('candidate')" style="color: white; text-decoration: none; margin-right: 20px;">👤 Candidats</button>
-  <button  class="btn btn-primary mt-2"  (click)="navigateTo('gestion_entretien')" style="color: white; text-decoration: none; margin-right: 20px;">🗓️ Entretiens</button>
-  <button class="btn btn-danger mt-2" (click)="logout()">🔓 Déconnexion</button> 
-</nav>
+<app-navbar></app-navbar>
 <div class="dashboard-container">
   <h2>Dashboard Admin</h2>
 
@@ -21,6 +15,4 @@
     <button (click)="goToCandidats()">Suivant</button>
   </div>
 </div>
-<footer style="background-color: #224955; padding: 10px; color: white; text-align: center; position: fixed; bottom: 0; left: 0; width: 100%;">
-  <a routerLink="/about" style="color: white; text-decoration: none;">About Us</a>
-</footer>
+<app-footer></app-footer>

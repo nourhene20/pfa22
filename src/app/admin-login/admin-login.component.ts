@@ -3,13 +3,14 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { HttpClient } from '@angular/common/http';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-admin-login',
   templateUrl: './admin-login.component.html',
   standalone:true,
   styleUrls: ['./admin-login.component.scss'],
-  imports:[ ReactiveFormsModule,RouterModule,CommonModule]
+  imports:[ ReactiveFormsModule,RouterModule,CommonModule,FooterComponent]
 })
 export class AdminLoginComponent {
   loginForm: FormGroup;
