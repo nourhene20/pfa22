@@ -1,15 +1,15 @@
 <div class="container p-4">
-  <h1 class="text-xl font-bold mb-4">Page Client - Interview</h1>
-  <p class="text-sm text-gray-600 mb-4">Pour une meilleure expérience, utilisez un casque avec microphone.</p>
-
-  <video #videoPreview autoplay class="w-full mb-4 rounded border shadow"></video>
-
+  <h1 class="text-xl font-bold mb-4 text-center">Page Client - Interview</h1>
+  <p class="text-sm text-gray-600 mb-4 text-center">Pour une meilleure expérience, utilisez un casque avec microphone.</p>
+  <div class="mb-4" style="width: 100%; display: flex; justify-content: center;">
+    <video #videoPreview autoplay style="width: 900px; height: auto;" class="rounded border shadow"></video>
+  </div>
   <div id="chatbox" class="p-4 bg-gray-100 rounded shadow">
-    <h2 class="font-semibold mb-2">Dialogue</h2>
+    <h2 class="font-semibold mb-2 text-center">Dialogue</h2>
 
     <!-- ✅ On renomme #messages en #messagesContainer -->
     <div id="messages" #messagesContainer class="space-y-2 max-h-96 overflow-y-auto">
-      <!-- ✅ Aucun conflit, `messages` (le tableau) est clair -->
+      <!-- ✅ Aucun conflit, messages (le tableau) est clair -->
       <div *ngFor="let msg of messages || []" class="message" [ngClass]="msg.sender">
         {{ msg.timestamp }}: {{ msg.text }}
       </div>

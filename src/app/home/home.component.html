@@ -1,19 +1,19 @@
 <!-- Barre de navigation -->
 <nav style="background-color: #224955; padding: 15px; color: white; display: flex; justify-content: flex-end; align-items: center;">
-  <button class="btn btn-primary mt-2" (click)="goToLogin()" style="color: white; text-decoration: none; margin-right: 20px;">Login</button>
+  <a  class="navbar-logo">
+    <img src="assets/autohire-logo.png" alt="AutoHire Logo" class="logo-img">
+  </a>
+  <button class="nav-button" (click)="goToLogin()">🔓 Se connecter</button>
 </nav>
 
 <!-- Contenu principal -->
 <div style="display: flex; justify-content: center; align-items: center; height: calc(100vh - 140px); padding: 50px; background-color: #f5f5f5;">
   <div style="flex: 1; text-align: center;">
-    <h1 style="font-size: 32px; color: #224955; font-weight: bold;">Welcome to the Interview Management System</h1>
-    <p style="margin-top: 20px; font-size: 16px; color: #224955;">Manage your interviews efficiently.</p>
+    <h1 style="font-size: 32px; color: #224955; font-weight: bold;">Bienvenue sur le Système de Gestion des Entretiens</h1>
+    <p style="margin-top: 20px; font-size: 16px; color: #224955;">Gérez vos entretiens efficacement.</p>
   </div>
   <div style="flex: 1; text-align: center;">
     <img src="assets/welcome.jpg" alt="Welcome" style="max-width: 400px; width: 100%; border-radius: 8px;">
   </div>
 </div>
-<!-- Footer -->
-<footer style="background-color: #224955; padding: 10px; color: white; text-align: center; position: fixed; bottom: 0; left: 0; width: 100%;">
-  <a routerLink="/about" style="color: white; text-decoration: none;">About Us</a>
-</footer>
+<app-footer></app-footer>

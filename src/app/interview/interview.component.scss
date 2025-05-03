@@ -11,6 +11,9 @@ video {
   min-height: 200px;
   max-height: 400px;
   overflow-y: auto;
+  margin-left: auto;
+  margin-right: auto;
+  width: 900px;
 }
 
 #messages {
@@ -37,6 +40,10 @@ video {
 
 button {
   @apply mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #224955;
 }
 
 button:disabled {

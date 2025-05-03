@@ -1,14 +1,16 @@
 <nav class="navbar">
-  <!-- Icône Accueil à gauche -->
+  <!-- ✅ Logo + nom de l'app -->
   <div class="navbar-left">
-    <a routerLink="/admin" class="navbar-logo">🏠 Accueil</a>
+    <a routerLink="/admin" class="navbar-logo">
+      <img src="assets/autohire-logo.png" alt="AutoHire Logo" class="logo-img">
+    </a>
   </div>
 
   <!-- Liens à droite -->
   <div class="navbar-right">
-    <button class="nav-button"  (click)="navigateTo('results')">👤 Resultats</button>
+    <button class="nav-button" (click)="navigateTo('results')">👁️‍🗨️ Résultats</button>
     <button class="nav-button" (click)="navigateTo('candidate')">👤 Candidats</button>
     <button class="nav-button" (click)="navigateTo('gestion-entretien')">🗓 Entretiens</button>
-    <button class="nav-button" (click)="navigateTo('home')">🔓 Déconnexion</button>
-  </div>
+    <button class="nav-button" (click)="navigateTo('home')">🔐 Déconnexion</button>
+  </div>
 </nav>

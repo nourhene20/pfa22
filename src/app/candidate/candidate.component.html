@@ -2,7 +2,9 @@
 <div class="container">
   <h1>Gestion des Candidats</h1>
 
-  <div *ngIf="successMessage" class="alert-success">{{ successMessage }}</div>
+  <div *ngIf="successMessage" class="alert alert-success" role="alert">
+    {{ successMessage }}
+  </div>
 
   <form [formGroup]="candidateForm" (ngSubmit)="onSubmit()" autocomplete="off">
     <!-- CIN -->

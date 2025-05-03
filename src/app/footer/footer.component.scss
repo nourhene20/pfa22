@@ -7,7 +7,8 @@ footer {
   bottom: 0;            /* ✅ Collé en bas */
   left: 0;              /* ✅ Collé à gauche */
   width: 100%;          /* ✅ Prend toute la largeur */
-  z-index: 1000;        /* ✅ Par-dessus les autres éléments */
+  z-index: 1000; 
+  text-align: left;       /* ✅ Par-dessus les autres éléments */
 }
 
 

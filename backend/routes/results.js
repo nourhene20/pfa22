@@ -97,7 +97,6 @@ router.delete('/results/:email', async (req, res) => {
     // Supprimer de la base de données
     await File.deleteMany({ candidateId: candidate._id });
     await Link.deleteMany({ email });
-    await Candidate.deleteOne({ _id: candidate._id });
 
     res.status(200).json({ message: '✅ Données du candidat supprimées avec succès' });
   } catch (err) {
