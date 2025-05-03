@@ -1,13 +1,15 @@
 footer {
-  background-color: #224955; /* Conservé comme demandé */
+  background-color: #224955;
   padding: 10px;
   color: white;
   text-align: center;
-  position: relative; /* Position normale pour apparaître à la fin du contenu */
-  width: 100%; /* Pleine largeur */
-  z-index: 1000; /* Assure que le footer reste au-dessus des autres éléments */
-  margin-top: auto; /* Assure que le footer reste en bas de la page si le contenu est court */
+  position: fixed;      /* ✅ Fixe le footer */
+  bottom: 0;            /* ✅ Collé en bas */
+  left: 0;              /* ✅ Collé à gauche */
+  width: 100%;          /* ✅ Prend toute la largeur */
+  z-index: 1000;        /* ✅ Par-dessus les autres éléments */
 }
+
 
 footer a {
   color: white;

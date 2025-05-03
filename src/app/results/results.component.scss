@@ -6,7 +6,21 @@
     background-color: #f9f9f9;
     text-align: center; /* ✅ Texte centré */
   }
+  .delete-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    color: #c00;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
   
+  .delete-button:hover {
+    color: #f00;
+  }
   h1 {
     margin-bottom: 30px;
     color: #224955;

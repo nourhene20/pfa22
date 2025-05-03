@@ -22,4 +22,17 @@ export class ResultsComponent implements OnInit {
       error: err => console.error('❌ Erreur chargement résultats', err)
     });
   }
+  deleteResult(r: any): void {
+    if (confirm(`Supprimer l'entretien de ${r.nom} ${r.prenom} ?`)) {
+      this.http.delete(`http://localhost:3000/api/results/${r.email}`).subscribe({
+        next: () => {
+          this.results = this.results.filter(res => res.email !== r.email);
+          console.log('✅ Supprimé avec succès');
+        },
+        error: err => console.error('❌ Erreur suppression', err)
+      });
+    }
+  }
+  
+  
 }

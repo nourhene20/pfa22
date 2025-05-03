@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, Renderer2 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+
 @Component({
   selector: 'app-interview',
   templateUrl: './interview.component.html',
