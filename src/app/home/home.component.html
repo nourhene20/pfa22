@@ -1,10 +1,14 @@
 <!-- Barre de navigation -->
-<nav style="background-color: #224955; padding: 15px; color: white; display: flex; justify-content: flex-end; align-items: center;">
-  <a  class="navbar-logo">
-    <img src="assets/autohire-logo.png" alt="AutoHire Logo" class="logo-img">
+<nav style="background-color: #224955; padding: 15px 30px; color: white; display: flex; justify-content: space-between; align-items: center;">
+  <!-- ✅ Logo à gauche -->
+  <a class="navbar-logo" href="#">
+    <img src="assets/autohire-logo.png" alt="AutoHire Logo" class="logo-img" style="height: 40px;">
   </a>
-  <button class="nav-button" (click)="goToLogin()">🔓 Se connecter</button>
+
+  <!-- ✅ Bouton à droite -->
+  <button class="nav-button" (click)="goToLogin()">🔓Connexion</button>
 </nav>
+
 
 <!-- Contenu principal -->
 <div style="display: flex; justify-content: center; align-items: center; height: calc(100vh - 140px); padding: 50px; background-color: #f5f5f5;">

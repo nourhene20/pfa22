@@ -64,7 +64,7 @@ app.post('/api/send-links', async (req, res) => {
         const mailOptions = {
           from: `"Entretien" <${adminEmail}>`,
           to: email,
-          subject: 'Votre lien d\'entretien personnalisé',
+          subject: 'Votre lien d\'entretien est valable entre le 07/05/2025 et 10/05/2025 :',
           html: `<p>Bonjour,</p><p>Voici votre lien d'entretien : <a href="${lien}">${lien}</a></p><p>Merci.</p>`
         };
 
