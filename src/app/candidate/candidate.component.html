@@ -5,43 +5,83 @@
   <div *ngIf="successMessage" class="alert-success">{{ successMessage }}</div>
 
   <form [formGroup]="candidateForm" (ngSubmit)="onSubmit()" autocomplete="off">
+    <!-- CIN -->
     <div>
       <label for="cin">CIN :</label>
       <input id="cin" type="text" formControlName="cin" autocomplete="off">
+      <div *ngIf="candidateForm.get('cin')?.touched && candidateForm.get('cin')?.invalid" class="error">
+        <small *ngIf="candidateForm.get('cin')?.errors?.['required']">Le CIN est requis.</small>
+        <small *ngIf="candidateForm.get('cin')?.errors?.['pattern']">Le CIN doit contenir exactement 8 chiffres.</small>
+      </div>
     </div>
+  
+    <!-- Nom -->
     <div>
       <label for="nom">Nom :</label>
       <input id="nom" type="text" formControlName="nom">
+      <div *ngIf="candidateForm.get('nom')?.touched && candidateForm.get('nom')?.invalid" class="error">
+        <small>Le nom est requis.</small>
+      </div>
     </div>
+  
+    <!-- Prénom -->
     <div>
       <label for="prenom">Prénom :</label>
       <input id="prenom" type="text" formControlName="prenom">
+      <div *ngIf="candidateForm.get('prenom')?.touched && candidateForm.get('prenom')?.invalid" class="error">
+        <small>Le prénom est requis.</small>
+      </div>
     </div>
+  
+    <!-- Email -->
     <div>
       <label for="email">Email :</label>
       <input id="email" type="email" formControlName="email">
+      <div *ngIf="candidateForm.get('email')?.touched && candidateForm.get('email')?.invalid" class="error">
+        <small *ngIf="candidateForm.get('email')?.errors?.['required']">L'email est requis.</small>
+        <small *ngIf="candidateForm.get('email')?.errors?.['email']">Format d'email invalide.</small>
+      </div>
     </div>
+  
+    <!-- Domaine -->
     <div>
       <label for="domaine">Domaine :</label>
       <input id="domaine" type="text" formControlName="domaine">
+      <div *ngIf="candidateForm.get('domaine')?.touched && candidateForm.get('domaine')?.invalid" class="error">
+        <small>Le domaine est requis.</small>
+      </div>
     </div>
+  
+    <!-- Téléphone -->
     <div>
       <label for="telephone">Téléphone :</label>
       <input id="telephone" type="text" formControlName="telephone">
+      <div *ngIf="candidateForm.get('telephone')?.touched && candidateForm.get('telephone')?.invalid" class="error">
+        <small *ngIf="candidateForm.get('telephone')?.errors?.['required']">Le téléphone est requis.</small>
+        <small *ngIf="candidateForm.get('telephone')?.errors?.['pattern']">Le téléphone doit contenir exactement 8 chiffres.</small>
+      </div>
     </div>
+  
+    <!-- Diplôme -->
     <div>
       <label for="diplome">Diplôme :</label>
       <input id="diplome" type="text" formControlName="diplome">
+      <div *ngIf="candidateForm.get('diplome')?.touched && candidateForm.get('diplome')?.invalid" class="error">
+        <small>Le diplôme est requis.</small>
+      </div>
     </div>
+  
+    <!-- Boutons -->
     <div>
-      <button type="submit">{{ isEditMode ? '✏️ Modifier' : '➕ Ajouter' }}</button>
+      <button type="submit" [disabled]="candidateForm.invalid">{{ isEditMode ? '✏️ Modifier' : '➕ Ajouter' }}</button>
       <button type="button" (click)="cancelEdit()" *ngIf="isEditMode">❌ Annuler</button>
       <button (click)="showCandidates = !showCandidates">
         {{ showCandidates ? '🙈 Masquer la liste' : '👁️ Afficher la liste des candidats' }}
       </button>
     </div>
-
   </form>
+  
+
   <div *ngIf="showCandidates">
   <h2>Liste des Candidats</h2>
   <table border="1">

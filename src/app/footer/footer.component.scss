@@ -1,21 +1,20 @@
 footer {
-    background-color: #224955; // Conservé comme demandé
-    padding: 10px;
-    color: white;
-    text-align: center;
-    position: fixed; // Fixe le footer en bas de l'écran
-    bottom: 0; // Aligné au bas de la fenêtre
-    width: 100%; // Pleine largeur
-    z-index: 1000; // Assure que le footer reste au-dessus des autres éléments
-    // Pas de display: flex, laissé par défaut (block)
-  }
-  
-  footer a {
-    color: white;
-    margin: 0 10px;
-    text-decoration: none;
-  
-    &:hover {
-      text-decoration: underline;
-    }
-  }
+  background-color: #224955; /* Conservé comme demandé */
+  padding: 10px;
+  color: white;
+  text-align: center;
+  position: relative; /* Position normale pour apparaître à la fin du contenu */
+  width: 100%; /* Pleine largeur */
+  z-index: 1000; /* Assure que le footer reste au-dessus des autres éléments */
+  margin-top: auto; /* Assure que le footer reste en bas de la page si le contenu est court */
+}
+
+footer a {
+  color: white;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
